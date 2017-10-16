@@ -1,0 +1,73 @@
+﻿
+<div class="container ">
+	<!--First row-->
+	<div class="row wow fadeIn" data-wow-delay="0.2s">
+		<div class="col-md-12">
+			<ul class="animated fadeInUp">
+				<li>
+					<h1 class="h1-responsive font-bold">
+						My Acrobat ColdFusion Way
+					</h1>
+				</li>
+				<li>
+					<p>
+						The most powerful and free PDF Service for YOU!
+					</p>
+				</li>
+				<li>
+					<p>
+						Convert any website to PDF
+					</p>
+					<div class="pt-1 pb-4">
+						<!--- <form id="urlForm" action="?event=Main.urlToPDF" method="POST"  > --->
+						<div class="input-group md-form form-sm form-2 pl-0">
+						    <input id="url_input" name="url_input" class="form-control my-0 py-1 red-border text-white " type="text" placeholder="http://qbillc.com" aria-label="Search">
+						    <button class="input-group-addon red text-white waves-effect orange darken-2" style="cursor:pointer" id="urltoPDF_btn"><i class="fa fa-file-pdf-o fa-lg" aria-hidden="true"></i> &nbsp; Convert to PDF</a>
+						</div>
+						<!--- </form> --->
+					</div>
+				</li>
+				<li>
+					<div class="pt-1 pb-4 ">
+						<form id="fileupload" action="?event=Main.uploadFiles" method="POST" enctype="multipart/form-data" onsubmit="return beforeUpload();">
+							<div class="file-field">
+								<div class="btn orange darken-2 btn-sm">
+									<span>Choose files</span>
+									<input type="file" id="uploaded_file" name="files[]" multiple >
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate text-white" type="text" placeholder="Upload one or more files">
+								</div>
+
+								<button id="upload_pdf_btn" type="submit" class="btn orange darken-2">
+									<i class="glyphicon glyphicon-upload"></i>
+									<span>Start upload</span>
+								</button>
+							</div>
+
+							
+						</form>
+					</div>
+				</li>
+				<br>
+				<hr>
+				<br>
+				
+			</ul>
+		</div>
+	</div>
+	<!--/.First row-->
+	<hr class="extra-margins">
+	
+	<div class="row">
+	
+		<cfoutput >
+		 	#myPDFFiles()#
+		</cfoutput>
+	</div>
+	
+</div>
+<!--/.Main layout-->
+    
+   
+	
