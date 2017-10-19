@@ -86,7 +86,7 @@
     <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top unique-color-dark">
             <div class="container">
-                <a class="navbar-brand" href="<cfoutput>#application.cbcontroller.getconfigSettings().urls.homepage#</cfoutput>">My Acrobat</a>
+                <a class="navbar-brand" href="<cfoutput>#application.cbcontroller.getconfigSettings().urls.homepage#</cfoutput>">MY ACROBAT</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

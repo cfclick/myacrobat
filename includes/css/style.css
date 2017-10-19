@@ -1,5 +1,79 @@
 /* YOUR CUSTOM STYLES */
 
+nav{
+	width:221px;
+	height:208px;
+	background:url(../images/nav-bg.png);
+	position:absolute;
+	top:162px;
+	left:0;
+	z-index:99;
+}
+
+nav>ul{
+	padding-top:21px;
+}
+
+nav>ul>li{
+	position:relative;
+}
+
+nav>ul>li a{
+	font:16px/34px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	text-decoration:none;
+	padding-left:56px;
+	display:block;
+	color:#8a8989;
+	position:relative;
+	z-index:1;
+}
+
+nav>ul>li a>span{
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background:url(../images/nav-act-bg.png);
+	z-index:-1;
+	display:none;
+}
+
+nav>ul>li>ul{
+	width:221px;
+	position:absolute;
+	left:222px;
+	top:0;
+}
+
+nav>ul>li>ul a{
+	background:#000;
+	padding-left:12px;
+	margin-bottom:1px;
+	position:relative;
+	z-index:99;
+}
+
+nav>ul>li>ul a:hover{
+	color:#ff8004;
+}
+
+
+#glob{
+	width:100%;
+	height:100%;
+	min-height:748px;
+	min-width:940px;
+	position:absolute;
+	z-index:1;
+	left:0;
+	top:0;
+	color:#7d7d7d;
+	font:13px/18px "Trebuchet MS", Arial, Helvetica, sans-serif;
+	overflow:hidden;
+}
+
 .modal-heade-black{
 	color:#000000;
 }
