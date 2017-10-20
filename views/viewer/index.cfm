@@ -28,6 +28,22 @@
 
 </style>
 <cfoutput>
+
+
+	<div class="fixed-action-btn" style="padding-right:100px">
+		<a class="btn-floating peach-gradient"><i class="fa fa-leaf"></i></a>
+		<!---<a class="btn-floating peach-gradient"> <i class="fa fa-cogs" aria-hidden="true"></i> </a>--->
+		<ul style="padding-right:100px">
+			<li><a id="restore_btn" href="##"  class="btn-floating btn-sm bg-primary"><i class="fa fa-undo fa-lg" aria-hidden="true"></i></a></li>
+			<li><a id="delete_btn" href="##"  class="btn-floating btn-sm orange"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></li>
+			<li><a id="email_btn" href="##"  class="btn-floating btn-sm orange" data-toggle="modal" data-target="##myemail_modal"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+		</ul>
+	</div>
+
+
+	<!---<a class="btn-floating btn-lg purple-gradient"><i class="fa fa-bolt"></i></a>
+<a class="btn-floating peach-gradient"><i class="fa fa-leaf"></i></a>
+<a class="btn-floating btn-sm blue-gradient"><i class="fa fa-star"></i></a>--->
 	<input type="hidden" name="fileName" id="fileName" value="#rc.fileName#" />
 	<div class="container" style="padding-top:10px">
 	
@@ -92,7 +108,7 @@
 						<form class="col-md-12">
 							<div class="row">
 								<div class="md-form form-group form-sm">
-									<input type="text" id="d_x1" value="440" class="form-control"
+									<input type="text" id="d_x1" value="440" class="form-control" required="yes"
 									       style="width:40px"/>
 									<label for="d_x1">
 										x1

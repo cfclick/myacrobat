@@ -92,30 +92,34 @@ Main.prototype.setEventListeners = function(event){
 	
 
 	main.upload_pdf_btn.on('click', function(){
-		var view_model = { 'files[]' : main.uploaded_file.val()};
-		main.action_label.html('Uploading');
-		main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});
-		/*var url = main.config.urls.main.uploadFiles;
-		$.ajax(	{
-        	type: "post",
-        	url: url,		
-        	data: view_model,
-       		beforeSend: function( xhr ){  
-				main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});	 
-			},
-    		success: function( data ){
-				main.loading_modal.modal('hide');
-    			
-    			self.location = main.config.urls.root;
-    			//$('#tab'+nextTab).html( data ).append( new Client( main.loggedInIdentity, viewModel ) );
-    		},
-			error: function( objRequest, strError ){
-				main.loading_modal.modal('hide');
-        		console.log(objRequest);   
-        		console.log(strError);   
-        	},
-       	 	async: true
-    	});	*/	
+		if( main.uploaded_file.val().length == 0 ){
+			toastr.error('Please select a file then upload.');			    			
+		}else{	
+			var view_model = { 'files[]' : main.uploaded_file.val()};
+			main.action_label.html('Uploading');
+			main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});
+			/*var url = main.config.urls.main.uploadFiles;
+			$.ajax(	{
+	        	type: "post",
+	        	url: url,		
+	        	data: view_model,
+	       		beforeSend: function( xhr ){  
+					main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});	 
+				},
+	    		success: function( data ){
+					main.loading_modal.modal('hide');
+	    			
+	    			self.location = main.config.urls.root;
+	    			//$('#tab'+nextTab).html( data ).append( new Client( main.loggedInIdentity, viewModel ) );
+	    		},
+				error: function( objRequest, strError ){
+					main.loading_modal.modal('hide');
+	        		console.log(objRequest);   
+	        		console.log(strError);   
+	        	},
+	       	 	async: true
+	    	});	*/	
+	    }
 	});
 
 	main.urltoPDF_btn.on('click', function(){

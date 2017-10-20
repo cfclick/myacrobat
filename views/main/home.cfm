@@ -5,16 +5,22 @@
 		<div class="col-md-12">
 			<ul class="animated fadeInUp">
 				<li>
+					<center>
+					<img src="../../includes/special/images/banner.png" align="center"/>
+					</center>
+				</li>
+				<!---<li>
 					<h1 class="h1-responsive font-bold">
 						My Acrobat ColdFusion Way
 					</h1>
-				</li>
+				</li>--->
 				<li>
-					<p>
+					<h1>
 						The most powerful and free PDF Service for YOU!
-					</p>
+					</h1>
 				</li>
-				<li>
+				<br><br>
+				<!---<li>
 					<p>
 						Convert any website to PDF
 					</p>
@@ -26,17 +32,18 @@
 						</div>
 						<!--- </form> --->
 					</div>
-				</li>
+				</li>--->
 				<li>
 					<div class="pt-1 pb-4 ">
 						<form id="fileupload" action="?event=Main.uploadFiles" method="POST" enctype="multipart/form-data" onsubmit="return beforeUpload();">
 							<div class="file-field">
 								<div class="btn orange darken-2 btn-sm">
-									<span>Choose files</span>
-									<input type="file" id="uploaded_file" name="files[]" multiple >
+									<span>Choose file</span>
+									<input type="file" id="uploaded_file" name="files[]"  ><!---multiple--->
 								</div>
 								<div class="file-path-wrapper">
-									<input class="file-path validate text-white" type="text" placeholder="Upload one or more files">
+									<input id="filename" class="file-path validate text-white" type="text" placeholder="Upload your file" required="yes">
+									<label for="filename" data-error="invalid" data-success="valid">Select file to upload</label>
 								</div>
 
 								<button id="upload_pdf_btn" type="submit" class="btn orange darken-2">

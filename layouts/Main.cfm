@@ -72,6 +72,19 @@
             -o-background-size: cover;
             background-size: cover;
         }
+        
+        input[type=text],
+    input[type=password],
+    input[type=email],
+    input[type=url],
+    input[type=time],
+    input[type=date],
+    input[type=datetime-local],
+    input[type=tel],
+    input[type=number],
+    input[type=search-md] {
+        height: 1rem;
+    }
     </style>
 	
 	
@@ -84,16 +97,16 @@
 <body>
 
     <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top unique-color-dark">
+        <nav class="navbar navbar-expand-lg fixed-top bg-faded">
             <div class="container">
-                <a class="navbar-brand" href="<cfoutput>#application.cbcontroller.getconfigSettings().urls.homepage#</cfoutput>">MY ACROBAT</a>
+                <a class="navbar-brand" href="<cfoutput>#application.cbcontroller.getconfigSettings().urls.homepage#</cfoutput>"><img src="/includes/special/images/logo.png" ></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto text-white">
                     	
-                        <cfif event.getCurrentEvent() eq 'viewer.workbench'>
+                       <!--- <cfif event.getCurrentEvent() eq 'viewer.workbench'>
                             
                             <li class="nav-item" style="padding-left:2px;padding-right:2px">
                                 <a class="nav-link orange darken-2" href="#" id="restore_btn"><i class="fa fa-undo fa-lg" aria-hidden="true"></i></a>
@@ -108,7 +121,7 @@
                                 <a class="nav-link disabled" href="#"><i class="fa fa-share fa-lg" aria-hidden="true"></i></a>
                             </li>
                         </cfif>
-                       
+                       --->
                 </div>
             </div>
         </nav>
@@ -122,7 +135,7 @@
 	    </div>
         <div class="full-bg-img flex-center">
             
-        	<cfoutput><div class="container-fluid" style="padding-top:120px">#renderView()#</div></cfoutput>
+        	<cfoutput><div class="container-fluid" style="padding-top:160px">#renderView()#</div></cfoutput>
             
         </div>
     </div>
