@@ -13,6 +13,8 @@ function DigitalSignature(){
 	this.page = $("#page");
 	this.fieldName = $("#fieldName");
 	
+	//form
+	//this.digital_signature_form = $("#digital_signature_form");
 	
 	this.setEventListeners();
 }
@@ -21,7 +23,9 @@ function DigitalSignature(){
 
 DigitalSignature.prototype.setEventListeners = function(event){
 	
+	
 	digitalSignature.add_signature_field_btn.on('click',function(e){
+			
 			var view_model = {
 						newuserpassword: main.newuserpassword.val()
 						,x1:digitalSignature.d_x1.val()
@@ -32,7 +36,10 @@ DigitalSignature.prototype.setEventListeners = function(event){
 						,fieldName:digitalSignature.fieldName.val()
 						,fileName:workBench.fileName.val()
 					};
-					var url = main.config.urls.digitalsignature.addField;
+			
+			msg = digitalSignature.validate( view_model );
+			if( msg == ""){
+				var url = main.config.urls.digitalsignature.addField;
 					
 					$.ajax(	{
 			        	type: "post",
@@ -56,7 +63,48 @@ DigitalSignature.prototype.setEventListeners = function(event){
 			        	},
 			       	 	async: true
 			    	});		
+			}else{
+				toastr.error(msg);
+			}
+					
 	});
 								
 }
+
+DigitalSignature.prototype.validate = function( model ){
+	
+	var message = "";
+    if (model.x1 == "") {
+        message+="X1 conrdinate is required<br>";
+        
+    }
+    if (model.y1 == "") {
+        message+="Y1 conrdinate is required<br>";
+        
+    }
+    if (model.x2 == "") {
+        message+="X2 conrdinate is required<br>";
+        
+    }
+    
+    if (model.y2 == "") {
+        message+="Y2 conrdinate is required<br>";
+        
+    }
+	
+	if (model.fieldName == "") {
+        message+="Signature field name is required<br>";
+        
+    }
+    
+    if (model.page == "" ) {
+        message+="Page number is required.<br>";        
+    }
+    
+    if ( Number(model.page) <= 0) {
+        message+="Enter a positive number for page.<br>";        
+    }
+	return message;
+}
+
 

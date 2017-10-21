@@ -205,7 +205,7 @@
 <![endif]-->
 <!-- Modal -->
 <div class="modal fade top" id="confirmation_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-frame modal-top" role="document">
+    <div class="modal-dialog modal-notify modal-warning" role="document">
         <!--Content-->
         <div class="modal-content">
             <!--Header-->

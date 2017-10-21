@@ -50,13 +50,22 @@ component{
 			}
 			
 			default:{
-				
-				cfpdf(action="addstamp"
+				if( isdefined("rc.note") && len(rc.note) ){
+					cfpdf(action="addstamp"
 						, source=source
 						, destination=destination
 						, overwrite=true ) {
 		 	 				cfpdfparam(iconname=rc.type, coordinates="#rc.x1#,#rc.y1#,#rc.x2#,#rc.y2#", pages=rc.pages, note=rc.note);
 	  					};
+				}else{
+					cfpdf(action="addstamp"
+						, source=source
+						, destination=destination
+						, overwrite=true ) {
+		 	 				cfpdfparam(iconname=rc.type, coordinates="#rc.x1#,#rc.y1#,#rc.x2#,#rc.y2#", pages=rc.pages);
+	  					};
+				}
+				
   		
 			}
 		}

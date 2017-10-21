@@ -30,13 +30,14 @@
 <cfoutput>
 
 
-	<div class="fixed-action-btn" style="padding-right:100px">
+ <!---<i id="icon" class="fa fa-file-pdf-o" style="text-shadow: rgb(172, 87, 0) 0px 0px 0px, rgb(184, 93, 0) 1px 1px 0px, rgb(196, 99, 0) 2px 2px 0px, rgb(208, 105, 0) 3px 3px 0px, rgb(221, 112, 0) 4px 4px 0px, rgb(233, 118, 0) 5px 5px 0px; font-size: 29px; color: rgb(255, 255, 255); height: 50px; width: 50px; line-height: 50px; border-radius: 26%; text-align: center; background-color: rgb(245, 124, 0);"></i> 
+--->	<div class="fixed-action-btn" style="padding-right:100px">
 		<a class="btn-floating peach-gradient"><i class="fa fa-leaf"></i></a>
 		<!---<a class="btn-floating peach-gradient"> <i class="fa fa-cogs" aria-hidden="true"></i> </a>--->
 		<ul style="padding-right:100px">
-			<li><a id="restore_btn" href="##"  class="btn-floating btn-sm bg-primary"><i class="fa fa-undo fa-lg" aria-hidden="true"></i></a></li>
-			<li><a id="delete_btn" href="##"  class="btn-floating btn-sm orange"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></li>
-			<li><a id="email_btn" href="##"  class="btn-floating btn-sm orange" data-toggle="modal" data-target="##myemail_modal"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+			<li><a id="restore_btn" href="##" class="btn-floating btn-sm bg-primary"><i class="fa fa-undo fa-lg" aria-hidden="true"></i></a></li>
+			<li><a id="delete_btn" href="##" class="btn-floating btn-sm orange"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></li>
+			<li><a id="email_btn" href="##" class="btn-floating btn-sm orange" data-toggle="modal" data-target="##myemail_modal"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
 		</ul>
 	</div>
 
@@ -95,8 +96,8 @@
 			<div class="modal-content">
 				<div class="modal-header text-center modal-heade-black">
 					<h4>
-						<i class="fa fa-file">
-						</i>
+						<!---<i class="fa fa-file">
+						</i>--->
 						Digital Signature
 					</h4>
 					<button type="submit" class="btn orange darken-2 pull-right" data-dismiss="modal">
@@ -108,17 +109,17 @@
 						<form class="col-md-12">
 							<div class="row">
 								<div class="md-form form-group form-sm">
-									<input type="text" id="d_x1" value="440" class="form-control" required="yes"
-									       style="width:40px"/>
-									<label for="d_x1">
+									<input type="text" id="d_x1" value="440" class="form-control" required="yes" style="width:40px"/>									       style="width:40px"/>
+									
+									<label for="d_x1" data-error="invalid" data-success="valid">
 										x1
 									</label>
 								</div>
 								
 								<div class="md-form form-group form-sm">
-									<input type="text" id="d_y1" value="75" class="form-control"
+									<input type="text" id="d_y1" value="75" class="form-control" required="yes"
 									       style="width:40px"/>
-									<label for="d_y1">
+									<label for="d_y1" data-error="invalid" data-success="valid">
 										y1
 									</label>
 								</div>
@@ -132,17 +133,17 @@
 							<br>
 							<div class="row pull-right">
 								<div class="md-form form-group form-sm">
-									<input type="text" id="d_x2" value="570" class="form-control"
+									<input type="text" id="d_x2" value="570" class="form-control" required="yes"
 									       style="width:40px"/>
-									<label for="d_x2">
+									<label for="d_x2" data-error="invalid" data-success="valid">
 										x2
 									</label>
 								</div>
 								
 								<div class="md-form form-group form-sm">
-									<input type="text" id="d_y2" value="38" class="form-control"
+									<input type="text" id="d_y2" value="38" class="form-control" required="yes"
 									       style="width:40px"/>
-									<label for="d_y2">
+									<label for="d_y2" data-error="invalid" data-success="valid">
 										y2
 									</label>
 								</div>
@@ -153,8 +154,8 @@
 							<br>
 							<div class="row">
 								<div class="md-form form-group form-sm">
-									<input type="text" id="fieldName" value="Signature1" class="form-control"/>
-									<label for="fieldName">
+									<input type="text" id="fieldName" value="Signature1" class="form-control" required="yes"/>
+									<label for="fieldName" data-error="invalid" data-success="valid">
 										Signature Field Name
 									</label>
 								</div>
@@ -162,8 +163,8 @@
 
 							<div class="row">
 								<div class="md-form form-group form-sm">
-									<input type="text" id="page" class="form-control" value="1" />
-									<label for="page">
+									<input type="text" id="page" class="form-control" value="1" required="yes" />
+									<label for="page" data-error="invalid" data-success="valid">
 										Page Number
 									</label>
 								</div>
@@ -251,8 +252,8 @@
 							
 							<div class="row">
 								<div class="md-form form-group form-sm">
-									<input type="text" id="page" class="form-control" value="1" style="width:60px"/>
-									<label for="page">
+									<input type="text" id="r_page" class="form-control" value="1" style="width:60px"/>
+									<label for="r_page">
 										Page Number
 									</label>
 								</div>
@@ -314,6 +315,7 @@
 							
 							<div class="row">
 								<div style="width:300px;height:100px;border:1px solid ##000;margin-left:40px">
+									
 								</div>
 							</div>
 							<br>
@@ -401,8 +403,8 @@
 
 							<div class="row">
 								<div class="md-form form-group form-sm">
-									<input type="text" id="spage" class="form-control" value="1" required/>
-									<label for="page">
+									<input type="text" id="s_page" class="form-control" value="1" required/>
+									<label for="s_page">
 										Pages 
 									</label>
 								</div>
