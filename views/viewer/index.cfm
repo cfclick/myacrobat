@@ -29,11 +29,11 @@
 </style>
 <cfoutput>
 
-
- <!---<i id="icon" class="fa fa-file-pdf-o" style="text-shadow: rgb(172, 87, 0) 0px 0px 0px, rgb(184, 93, 0) 1px 1px 0px, rgb(196, 99, 0) 2px 2px 0px, rgb(208, 105, 0) 3px 3px 0px, rgb(221, 112, 0) 4px 4px 0px, rgb(233, 118, 0) 5px 5px 0px; font-size: 29px; color: rgb(255, 255, 255); height: 50px; width: 50px; line-height: 50px; border-radius: 26%; text-align: center; background-color: rgb(245, 124, 0);"></i> 
---->	<div class="fixed-action-btn" style="padding-right:100px">
+	<cfparam name="rc.password" type="string" default="">
+	
+	<div class="fixed-action-btn" style="padding-right:100px">
 		<a class="btn-floating peach-gradient"><i class="fa fa-leaf"></i></a>
-		<!---<a class="btn-floating peach-gradient"> <i class="fa fa-cogs" aria-hidden="true"></i> </a>--->
+
 		<ul style="padding-right:100px">
 			<li><a id="restore_btn" href="##" class="btn-floating btn-sm bg-primary"><i class="fa fa-undo fa-lg" aria-hidden="true"></i></a></li>
 			<li><a id="delete_btn" href="##" class="btn-floating btn-sm orange"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></li>
@@ -41,11 +41,9 @@
 		</ul>
 	</div>
 
-
-	<!---<a class="btn-floating btn-lg purple-gradient"><i class="fa fa-bolt"></i></a>
-<a class="btn-floating peach-gradient"><i class="fa fa-leaf"></i></a>
-<a class="btn-floating btn-sm blue-gradient"><i class="fa fa-star"></i></a>--->
 	<input type="hidden" name="fileName" id="fileName" value="#rc.fileName#" />
+	<input type="hidden" name="passPdf" id="passPdf"  value="#rc.password#" />
+										
 	<div class="container" style="padding-top:10px">
 	
 		<div class="row">

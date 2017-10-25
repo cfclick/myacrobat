@@ -3,6 +3,8 @@
 */
 component{
 	
+	property name="sessionStorage" inject="sessionStorage@cbstorages";
+	
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
 	this.prehandler_except 	= "";
@@ -38,14 +40,33 @@ component{
 		var destination = application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\" & rc.fileName;
 		rc.pathAndName = GetTempDirectory() & session.sessionID & '\' & rc.fileName;
 		var source = trim( rc.pathAndName );
+		//writeDump(sessionStorage.getVar('files'));abort;
+		if( isArray( sessionStorage.getVar('files') ) ){
+			var selectedPDF = arrayfilter(sessionStorage.getVar('files'), function(ele){
+				return ele.name == rc.fileName;
+			});
+			
+			local.pass = selectedPDF[1].password;
+			
+		}else{
+			local.pass = "";
+		}
 		
 		if( fileExists( source) ){
-			cfpdf( action="getinfo" ,name="reader", source=source);
+			if( len( local.pass )){
+				rc.hasPass = true;
+				rc.showerror = "Adding custom property feature is not availabale with password protected PDFs.";
+				cfpdf( action="getinfo" ,name="reader", source=source, password=local.pass);
+			}   			
+	   		else
+	   			cfpdf( action="getinfo" ,name="reader", source=source);
+   						
 			reader.Created = formatPDFdate( reader.Created );
 			reader.Modified = formatPDFdate( reader.Modified );
 			rc.pdf = reader;
 			
 			rc.Created = "D:" & DateFormat(now(), "YYYYMMDD") & TimeFormat(now(), "HHmmss") & "-00'00'";
+			
 			event.setView("Properties/index").nolayout();
 		}else{			
 			event.renderData( data="File #rc.fileName# not found.", type="json" ).nolayout();
@@ -59,26 +80,47 @@ component{
 		rc.pathAndName = GetTempDirectory() & session.sessionID & '\' & rc.fileName;
 		var source = trim( rc.pathAndName );
 		
-		var fileOutputStream = CreateObject("java", "java.io.FileOutputStream").init( destination );
-		//Read the source
-		var reader = createobject("java","com.lowagie.text.pdf.PdfReader").init( source );
-		//Initialize the stamper
-    	var stamper = createobject("java","com.lowagie.text.pdf.PdfStamper").init( reader, fileOutputStream);
-    	//Read source file   
-    	info = reader.getInfo();
-    	//Create custom property (tracking number )
-    	info.put(rc.name, rc.value);
-    	//Pushing data 
-	    stamper.setMoreInfo(info);
-	    stamper.close();  
-   		
-   		cffile(action="copy",
-			   source=destination,
-			   destination=source, mode="644");
-			       
-   		cfpdf( action="getinfo" ,name="reader", source=source);
-		rc.pdf = reader;
+		if( isArray( sessionStorage.getVar('files') ) ){
+			var selectedPDF = arrayfilter(sessionStorage.getVar('files'), function(ele){
+				return ele.name == rc.fileName;
+			});
+			
+			local.pass = selectedPDF[1].password;
+		}else{
+			local.pass = "";
+		}
 		
+		if( len( local.pass )){
+			rc.hasPass = true;
+			rc.showerror = "Adding custom property feature is not availabale with password protected PDFs.";
+    		var fileOutputStream = CreateObject("java", "java.io.FileOutputStream").init( destination );
+			//Read the source
+			var reader = createobject("java","com.lowagie.text.pdf.PdfReader").init( source );
+			//reader.unethicalreading = true;
+			//Initialize the stamper
+    		var stamper = createobject("java","com.lowagie.text.pdf.PdfStamper").init( reader, fileOutputStream);
+    	
+    		//Read source file   
+    		info = reader.getInfo();
+	    	//Create custom property (tracking number )
+	    	info.put(rc.name, rc.value);
+	    	//Pushing data 
+		    stamper.setMoreInfo(info);
+		    stamper.close();  
+	
+	   		
+	   		cffile(action="copy",
+				   source=destination,
+				   destination=source, mode="644");
+				   
+			cfpdf( action="getinfo" ,name="reader", source=source);
+			
+		}else{
+			rc.hasPass = false;
+			cfpdf( action="getinfo" ,name="reader", source=source, password=local.pass);
+		}
+		
+		rc.pdf = reader;				
 		event.setView("Properties/customPropertyTable").nolayout();
 	}
 	
@@ -118,18 +160,37 @@ component{
 		var destination = application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\" & rc.fileName;
 		rc.pathAndName = GetTempDirectory() & session.sessionID & '\' & rc.fileName;
 		var source = trim( rc.pathAndName );
+		
+		if( isArray( sessionStorage.getVar('files') ) ){
+			var selectedPDF = arrayfilter(sessionStorage.getVar('files'), function(ele){
+				return ele.name == rc.fileName;
+			});
+			
+			var pass = selectedPDF[1].password;
+		}else{
+			pass = "";
+		}
+		
    		str = {};
    		str['Title'] = rc.Title;
    		str['Author'] = rc.Author;
    		str['Subject'] = rc.Subject;
    		str['Keywords'] = rc.Keywords;
-   		cfpdf( action="setinfo" ,info=str, source=source, destination=destination, overwrite="yes" );
+   		
+   		if( len(pass ))	       
+   			cfpdf( action="setinfo" ,info=str, source=source, destination=destination, overwrite="yes", password=pass );
+   		else
+   			cfpdf( action="setinfo" ,info=str, source=source, destination=destination, overwrite="yes" );
    		
    		cffile(action="copy",
 			   source=destination,
 			   destination=source, mode="644");
-			       
-   		cfpdf( action="getinfo" ,name="reader", source=source);
+		
+		if( len(pass ))	       
+   			cfpdf( action="getinfo" ,name="reader", source=source, password=pass);
+   		else
+   			cfpdf( action="getinfo" ,name="reader", source=source);	       
+   		
 		rc.pdf = reader;
 		
 		event.setView("Properties/defaultProperties").nolayout();
@@ -163,8 +224,12 @@ component{
 	
 	private string function formatPDFdate( required string psdDateString ){
 		
-		var temp = replace( psdDateString,'D:','');		
-		return dateFormat(createDateTime( left( temp,4), mid( temp,5,2), mid( temp,7,2), mid( temp,9,2), mid( temp,11,2),mid( temp,13,2) ), 'mm/dd/yyyy hh:mm:ss');
+		var temp = replace( psdDateString,'D:','');	
+		
+		if( len( trim( temp ) ) )
+			return dateFormat(createDateTime( left( temp,4), mid( temp,5,2), mid( temp,7,2), mid( temp,9,2), mid( temp,11,2),mid( temp,13,2) ), 'mm/dd/yyyy hh:mm:ss');
+		else
+			return "";
 	}
 	
 	

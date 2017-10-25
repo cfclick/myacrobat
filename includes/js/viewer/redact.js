@@ -44,10 +44,26 @@ Redact.prototype.setEventListeners = function(event){
 		       			main.action_label.html('Redacting');
 						  main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});	 
 					},
-		    		success: function( fileName ){
+		    		success: function( data ){
+		    			//setTimeout(function (){main.loading_modal.modal('hide');},1500);
+		    			//workBench.preview( fileName, true );
+		    			
 		    			setTimeout(function (){main.loading_modal.modal('hide');},1500);
-		    			workBench.preview( fileName, true );
-		    			//$('#tab'+nextTab).html( data ).append( new Client( main.loggedInIdentity, viewModel ) );
+		    			if(data.fileName)
+		    				var fileName = data.fileName;
+		    			else
+		    				var fileName = data.FILENAME;
+					
+						if( data.success ){
+							workBench.preview( fileName, true );
+						}else{
+							main.errorModalDanger.modal('show');
+							if( data.showerror )
+								main.errorModalMessage.html(data.showerror);
+							else
+								main.errorModalMessage.html(data);
+						}
+						
 		    		},
 					error: function( objRequest, strError ){
 						setTimeout(function (){main.loading_modal.modal('hide');},1500);

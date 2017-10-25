@@ -1,6 +1,6 @@
 
 component{
-	
+	property name="sessionStorage" inject="sessionStorage@cbstorages";
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
 	this.prehandler_except 	= "";
@@ -12,11 +12,11 @@ component{
 	this.allowedMethods = {};
 	
 	function preview( event, rc, prc ){
-		
+				
 		rc.pathAndName = GetTempDirectory() & session.sessionID & '\' & rc.fileName;
-
 		if( fileexists( rc.pathAndName ) ){
 			var binaryobj = filereadBinary( rc.pathAndName  );
+			var pdfArgs = { bookmark = "yes", backgroundVisible = "yes" };
 			event.renderData( data=binaryobj, type="PDF" ).nolayout();
 		}else{
 			     

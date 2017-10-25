@@ -2,6 +2,7 @@
 * I am a new handler
 */
 component{
+	property name="sessionStorage" inject="sessionStorage@cbstorages";
 	
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
@@ -39,31 +40,70 @@ component{
 		var destination = application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\" & rc.fileName;
 		rc.pathAndName = GetTempDirectory() & session.sessionID & '\' & rc.fileName;
 		var source = trim( rc.pathAndName );
+		rc.success = true;	
+		if( isArray( sessionStorage.getVar('files') ) ){
+			var selectedPDF = arrayfilter(sessionStorage.getVar('files'), function(ele){
+				return ele.name == rc.fileName;
+			});
+			
+			local.pass = selectedPDF[1].password;
+			rc.hasPass = true;
+			rc.showerror = "Adding custom stamps feature is not availabale with password protected PDFs.";
+		}else{
+			local.pass = "";
+		}
 		
 		switch( trim(rc.type)) {
 			
 			case "Paid":			
 			case "Classified":			
 			case "Rejected":{
-				addCustomeStump(rc );
+
+				if( len( local.pass ))
+					rc.success = false;	
+				else
+					addCustomeStump(rc );
+				
 				break;
 			}
 			
 			default:{
 				if( isdefined("rc.note") && len(rc.note) ){
-					cfpdf(action="addstamp"
+					if( len( local.pass )){
+						cfpdf(action="addstamp"
 						, source=source
 						, destination=destination
-						, overwrite=true ) {
+						, overwrite=true 
+						, password=local.pass){
 		 	 				cfpdfparam(iconname=rc.type, coordinates="#rc.x1#,#rc.y1#,#rc.x2#,#rc.y2#", pages=rc.pages, note=rc.note);
 	  					};
-				}else{
-					cfpdf(action="addstamp"
+					}else{
+						cfpdf(action="addstamp"
 						, source=source
 						, destination=destination
-						, overwrite=true ) {
-		 	 				cfpdfparam(iconname=rc.type, coordinates="#rc.x1#,#rc.y1#,#rc.x2#,#rc.y2#", pages=rc.pages);
+						, overwrite=true ){
+		 	 				cfpdfparam(iconname=rc.type, coordinates="#rc.x1#,#rc.y1#,#rc.x2#,#rc.y2#", pages=rc.pages, note=rc.note);
 	  					};
+					}
+					
+				}else{
+					if( len( local.pass ))	 {
+						cfpdf(action="addstamp"
+								, source=source
+								, destination=destination
+								, overwrite=true
+								, password=local.pass ) {
+		 	 					cfpdfparam(iconname=rc.type, coordinates="#rc.x1#,#rc.y1#,#rc.x2#,#rc.y2#", pages=rc.pages);
+	  						};
+					}else{
+						cfpdf(action="addstamp"
+							, source=source
+							, destination=destination
+							, overwrite=true ) {
+		 	 					cfpdfparam(iconname=rc.type, coordinates="#rc.x1#,#rc.y1#,#rc.x2#,#rc.y2#", pages=rc.pages);
+	  						};
+					}
+					
 				}
 				
   		
@@ -73,7 +113,7 @@ component{
 		
   		sleep(500);
 		filecopy(destination,source);
-		rc.success = true;	
+		
 		rc["fileName"]= rc.fileName;
 		event.renderData( data=rc, type="json" ).nolayout();
 		

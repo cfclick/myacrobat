@@ -3,6 +3,8 @@
 */
 component{
 	
+	property name="sessionStorage" inject="sessionStorage@cbstorages";
+	
 	// OPTIONAL HANDLER PROPERTIES
 	this.prehandler_only 	= "";
 	this.prehandler_except 	= "";
@@ -44,21 +46,48 @@ component{
 		var destination = application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\" & rc.fileName;
 		rc.pathAndName = GetTempDirectory() & session.sessionID & '\' & rc.fileName;
 		var source = trim( rc.pathAndName );
-		sleep(1000);
+		
+		if( isArray( sessionStorage.getVar('files') ) ){
+			var selectedPDF = arrayfilter(sessionStorage.getVar('files'), function(ele){
+				return ele.name == rc.fileName;
+			});
+			
+			local.pass = selectedPDF[1].password;
+			rc.hasPass = true;
+			rc.showerror = "Adding custom stamps feature is not availabale with password protected PDFs.";
+		}else{
+			local.pass = "";
+		}
+		
+		sleep(300);
 		if( fileExists( source) ){
-			cfpdf( action="redact"
+			if( len( local.pass )){
+				cfpdf( action="redact"
+				, source=source
+				, destination=destination
+				, overwrite=true
+				, password=local.pass ) {
+	 	 			cfpdfparam( coordinates=rc.cord, pages=rc.page);
+  				};
+			}else{
+				cfpdf( action="redact"
 				, source=source
 				, destination=destination
 				, overwrite=true ) {
 	 	 			cfpdfparam( coordinates=rc.cord, pages=rc.page);
   				};
+			}
+			
 		
 			cffile(action="copy",
 			       source=destination,
 			       destination=source, mode="644");
-		
-			event.renderData( data=rc.fileName, type="json" ).nolayout();
+			       
+			rc.success = true;	
+			event.renderData( data=rc, type="json" ).nolayout();
 		}else{
+			rc.showerror = "File #rc.fileName# not found.";	
+			rc.success = false;
 			event.renderData( data="File #rc.fileName# not found.", type="json" ).nolayout();
 
 		}

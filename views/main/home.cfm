@@ -1,4 +1,22 @@
-﻿
+﻿<style >
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  		color: #ffffff;
+  		font-style:italic;
+	}
+	::-moz-placeholder { /* Firefox 19+ */
+	  	color: #ffffff;
+	  	font-style:italic;
+	}
+	:-ms-input-placeholder { /* IE 10+ */
+	  	color: #ffffff;
+	  	font-style:italic;
+	}
+	:-moz-placeholder { /* Firefox 18- */
+	  	color: #ffffff;
+	  	font-style:italic;
+	}
+	
+</style>
 <div class="container ">
 	<!--First row-->
 	<div class="row wow fadeIn" data-wow-delay="0.2s">
@@ -35,6 +53,11 @@
 				</li>--->
 				<li>
 					<div class="pt-1 pb-4 ">
+						<cfif isdefined("rc.showerror") and len(rc.showerror)>
+							<div class="alert alert-danger">
+								<cfoutput>#rc.showerror#</cfoutput>
+							</div>
+						</cfif>
 						<form id="fileupload" action="?event=Main.uploadFiles" method="POST" enctype="multipart/form-data" onsubmit="return beforeUpload();">
 							<div class="file-field">
 								<div class="btn orange darken-2 btn-sm">
@@ -45,7 +68,17 @@
 									<input id="filename" class="file-path validate text-white" type="text" placeholder="Upload your file" required="yes">
 									<label for="filename" data-error="invalid" data-success="valid">Select file to upload</label>
 								</div>
-
+								<br><br>
+									<!---	<div class="file-path-wrapper">--->
+									<div class="md-form form-group">
+										<input type="password" id="password" name="password" class="text-white" placeholder="Enter Password if the PDF is protected" />
+										<label for="password">
+											 Password
+										</label>
+									</div>
+								<!---</div>--->
+								
+								<br><br>
 								<button id="upload_pdf_btn" type="submit" class="btn orange darken-2">
 									<i class="glyphicon glyphicon-upload"></i>
 									<span>Start upload</span>
@@ -56,9 +89,7 @@
 						</form>
 					</div>
 				</li>
-				<br>
-				<hr>
-				<br>
+				
 				
 			</ul>
 		</div>

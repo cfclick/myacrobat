@@ -12,6 +12,7 @@ function WorkBench(){
 	
 	//inputs
 	this.fileName 		= $('#fileName');
+	this.passPdf 		= $('#passPdf');
 	this.your_email 	= $('#your_email');
 	this.your_subject 	= $('#your_subject');
 	this.your_message 	= $('#your_message');
@@ -185,7 +186,8 @@ WorkBench.prototype.setEventListeners = function(event){
 		
 		main.confirm_yes.on('click', function(event){
 			var view_model = {
-				fileName:workBench.fileName.val()
+				fileName:workBench.fileName.val(),
+				password:workBench.passPdf.val()
 			};
 	
 			var url = main.config.urls.sanitize.apply;
@@ -231,7 +233,8 @@ WorkBench.prototype.setEventListeners = function(event){
 	//	main.confirmation_modal.modal('show');
 		
 			var view_model = {
-				fileName:workBench.fileName.val()
+				fileName:workBench.fileName.val(),
+				password:workBench.passPdf.val()
 			};
 	
 			var url = main.config.urls.properties.index;

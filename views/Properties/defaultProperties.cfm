@@ -1,14 +1,16 @@
 <cfoutput>
 
 	<div id="main_properties_body">
-		<dl class="row" style="color:black">
-			<dt class="col-sm-3">
-				File Name
-			</dt>
-			<dd class="col-sm-9">
-				#rc.fileName#
-			</dd>
-		</dl>
+		<div class="row">
+			<dl class="row" style="color:black">
+				<dt class="col-sm-3">
+					File Name
+				</dt>
+				<dd class="col-sm-9">
+					#rc.fileName#
+				</dd>
+			</dl>
+		</div>
 		<!--First row-->
 		<div class="row">
 			<!--First column-->

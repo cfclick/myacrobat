@@ -1,5 +1,6 @@
 ﻿
 <cffunction name = "myPDFFiles" >
+	<cfset sleep(3000)/>
 	<cfset rc.pathtosave = application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\" />
 	<cfset	rc.currentWorkingURL = application.cbcontroller.getconfigSettings().urls.workingpdf & session.sessionID & "/" />	
 	<cfdirectory directory="#rc.pathtosave#" action="list" name="qry_workingfolder" filter="*.pdf" recurse="false" />
@@ -18,7 +19,7 @@
                 	<cfset thumb_img = "#rc.currentWorkingURL#thumbnail/#noextFileName#/#noextFileName#_page_1.jpg" />
                 	<div class="col-md-2" style="padding-top:15px;padding-bottom:15px">
                         <div class="card">
-                        	<a href="#CGI.SCRIPT_NAME#/viewer/workbench?fileName=#name#">
+                        	<a href="#CGI.SCRIPT_NAME#?event=viewer.workbench&fileName=#name#">
                             <img class="img-fluid" src="#thumb_img#" alt="Card image cap" />
                             </a>                      
                         </div>

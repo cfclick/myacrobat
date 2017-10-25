@@ -45,7 +45,7 @@ Stamp.prototype.setEventListeners = function(event){
 		        	url: url,		
 		        	data: view_model,
 		       		beforeSend: function( xhr ){  
-		       			main.action_label.html('Adding signature field');
+		       			main.action_label.html('Adding stamp');
 		       			main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});	 
 					},
 		    		success: function( data ){
@@ -59,7 +59,10 @@ Stamp.prototype.setEventListeners = function(event){
 							workBench.preview( fileName, true );
 						}else{
 							main.errorModalDanger.modal('show');
-							main.errorModalMessage.html(data);
+							if( data.showerror )
+								main.errorModalMessage.html(data.showerror);
+							else
+								main.errorModalMessage.html(data);
 						}
 					},
 					error: function( objRequest, strError ){

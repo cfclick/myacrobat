@@ -49,12 +49,28 @@ DigitalSignature.prototype.setEventListeners = function(event){
 			       			main.action_label.html('Adding signature field');
 			       			main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});	 
 						},
-			    		success: function( fileName ){
-			    			setTimeout(function (){main.loading_modal.modal('hide');},1500);
+			    		success: function( data ){
+			    			//setTimeout(function (){main.loading_modal.modal('hide');},1500);
 			    			//console.log(fileName);
-							workBench.preview( fileName, true );
-							toastr.info('Signature field will not show up if you are using Chrome/Firefox/Safari browesers! download the PDF and open it using Adobe Acrobat Reader.');
-			    			//$('#tab'+nextTab).html( data ).append( new Client( main.loggedInIdentity, viewModel ) );
+							//workBench.preview( fileName, true );
+							
+			    			setTimeout(function (){main.loading_modal.modal('hide');},1500);
+			    			if(data.fileName)
+			    				var fileName = data.fileName;
+			    			else
+			    				var fileName = data.FILENAME;
+						
+							if( data.success ){
+								workBench.preview( fileName, true );
+								toastr.info('Signature field will not show up if you are using Chrome/Firefox/Safari browesers! download the PDF and open it using Adobe Acrobat Reader.');
+							}else{
+								main.errorModalDanger.modal('show');
+								if( data.showerror )
+									main.errorModalMessage.html(data.showerror);
+								else
+									main.errorModalMessage.html(data);
+							}
+						
 			    		},
 						error: function( objRequest, strError ){
 							setTimeout(function (){main.loading_modal.modal('hide');},1500);
