@@ -85,6 +85,7 @@
     input[type=search-md] {
         height: 1rem;
     }
+    
     </style>
 	
 	
@@ -95,11 +96,11 @@
 </head>
 
 <body>
-
+<script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
     <!--Navbar-->
         <nav class="navbar navbar-expand-lg fixed-top bg-faded">
             <div class="container">
-                <a class="navbar-brand" href="<cfoutput>#application.cbcontroller.getconfigSettings().urls.homepage#</cfoutput>"><img src="/includes/special/images/logo.png" ></a>
+                <a class="navbar-brand" href="<cfoutput>#application.cbcontroller.getconfigSettings().urls.homepage#</cfoutput>"><img src="/includes/images/logo.png" ></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -304,15 +305,18 @@
 	<!-- Modal -->
 	<div class="modal fade right" id="loading_modal" tabindex="-1" role="dialog"
 	     aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-sm" role="document">
+	     
+		<div class="modal-dialog modal-sm text-center justify-content-center" role="document">
+		<img src="/includes/images/ajax-loader.gif">
+			<span class="text-white" id='action_label'>Loading, please wait.</span>
 			<!-- Modal content-->
-			<div class="modal-content text-center">
+			<!---<div class="modal-content text-center">
 				
-				<h3><span id='action_label'>Loading</span>, please wait</h3>
+				<h3><span id='action_label'>Loading, please wait</span></h3>
                 <div class="progress primary-color-dark orange darken-2">
                     <div class="indeterminate"></div>
                 </div>
-			</div>
+			</div>--->
 			<!-- /.Modal content-->
 		</div>
 	</div> <!--/ Modal -->
@@ -350,6 +354,8 @@
     </div>
 </div>
 <!-- Central Modal Medium Danger-->
+
+
 </body>
 
 </html>

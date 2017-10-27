@@ -24,7 +24,7 @@
 			<ul class="animated fadeInUp">
 				<li>
 					<center>
-					<img src="../../includes/special/images/banner.png" align="center"/>
+					<img src="/includes//images/banner.png" align="center"/>
 					</center>
 				</li>
 				<!---<li>
