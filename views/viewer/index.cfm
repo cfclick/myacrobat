@@ -1,7 +1,7 @@
 ﻿<style>
 	.fluidMedia {
 	position: relative;
-	padding-bottom: 94.00%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
+	padding-bottom: 100.00%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
 	padding-top: 20px;
 	height: 0;
 	overflow: hidden;
@@ -11,7 +11,7 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 96%;
+	height: 100%;
 	}
 	.modal-heade-black{
 	color:#000000;
@@ -24,6 +24,10 @@
     
     li .active .selected{
     	color:#000;
+    }
+    
+    select {
+    	display:block!important;
     }
 
 </style>
@@ -48,6 +52,9 @@
 	
 		<div class="row">
 			<div class="col-sm-2 col-md-2 col-lg-2">
+				<a href="#cgi.scRIPT_NAME#" class="btn orange darken-2 waves-effect btn-block" >
+					Home
+				</a>
 				<button type="button" class="btn orange darken-2 waves-effect btn-block" data-toggle="modal" 
 				        data-target="##digital_signature_modal">
 					Signature
@@ -61,15 +68,15 @@
 				<button type="button" class="btn orange darken-2 waves-effect btn-block" data-toggle="modal" data-target="##stamp_modal">
 					Stamp
 				</button>
+				<button type="button" class="btn orange darken-2 waves-effect btn-block" data-toggle="modal" data-target="##barcode_modal">
+					Barcode
+				</button>				
 				<button id="property_btn" type="button" class="btn orange darken-2 waves-effect btn-block" >
 					Properties
 				</button>
 			</div>
 			<div class="col-sm-10 col-md-10 col-lg-10">
-				<!--First row-->
 				
-				<!--/.First row-->
-
 				<div class="row wow fadeIn" data-wow-delay="0.4s">
 					<div class="col-sm-12 col-md-12 col-lg-12">						
 						<div class="fluidMedia">
@@ -340,8 +347,8 @@
 							<br>
 							<br>
 							<div class="row">
-								<div class="md-form form-group form-sm">
-									<select id="stamp_type" class="mdb-select" required>
+								<div class="md-form form-group form-sm"><!--class="mdb-select"-->
+									<select id="stamp_type" class="form-control" required>
 										<option value="" selected>Choose your option</option>
 											<option value="Approved">
 												Approved
@@ -433,6 +440,62 @@
 	
 	
 	
+	<!-- ================================================STAMP MODAL================================================== -->
+	<!-- Modal -->
+	<div class="modal fade right" id="barcode_modal" tabindex="-1" role="dialog"
+	     aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-full-height modal-right" role="document">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header text-center modal-heade-black">
+					<h4>
+						Barcode
+					</h4>
+					<button type="submit" class="btn orange darken-2 pull-right" data-dismiss="modal">
+						X
+					</button>
+				</div>
+				<div class="modal-body" style="padding:40px 50px;">
+					<div class="row">
+						<form class="col-md-12">
+							
+							<div class="row">
+								<div class="md-form form-group">
+									<input type="text" id="textToEncode" class="form-control" required/>
+									<label for="textToEncode">
+										Text To Encode 
+									</label>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="md-form form-group form-sm">
+									<input type="text" id="b_page" class="form-control" value="1" required/>
+									<label for="b_page">
+										Page
+									</label>
+								</div>
+							</div>
+							
+							
+						</form>
+					</div>
+				</div>
+				<!--Footer-->
+				<div class="modal-footer">
+					<button type="button" id="add_barcode_btn" class="btn orange darken-2 pull-right">
+						Add
+					</button>
+				</div>
+				<!--/.Footer-->
+			</div>
+			<!-- /.Modal content-->
+		</div>
+	</div><!--/ Modal -->
+	<!-- ==============================================END BARCODE MODAL================================================ -->
+	
+	
+	
 	
 	<!-- ================================================PROPERTIES MODAL================================================== -->
 	<!-- Modal -->
@@ -517,9 +580,10 @@
 
 <script src="/includes/js/viewer/workbench.js" 			type="application/javascript" ></script>
 <script src="/includes/js/viewer/digitalsignature.js" 	type="application/javascript" ></script>
-<script src="/includes/js/viewer/redact.js" 				type="application/javascript" ></script>
-<script src="/includes/js/viewer/properties.js" 			type="application/javascript" ></script>
+<script src="/includes/js/viewer/redact.js" 			type="application/javascript" ></script>
+<script src="/includes/js/viewer/properties.js" 		type="application/javascript" ></script>
 <script src="/includes/js/viewer/stamp.js" 				type="application/javascript" ></script>
+<script src="/includes/js/viewer/barcode.js" 			type="application/javascript" ></script>
 
 <script >
 

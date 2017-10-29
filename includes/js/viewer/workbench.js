@@ -21,6 +21,7 @@ function WorkBench(){
 	//modals
 	this.digital_signature_modal = $('#digital_signature_modal');
 	this.stamp_modal 			 = $('#stamp_modal');
+	this.barcode_modal 			 = $('#barcode_modal');
 	this.redact_modal 			 = $('#redact_modal');
 	this.property_modal 		 = $('#property_modal');
 	this.email_modal			 = $('#email_modal');
@@ -39,20 +40,26 @@ function WorkBench(){
 WorkBench.prototype.setEventListeners = function(event){
 	
 	workBench.digital_signature_modal.on('shown.bs.modal', function (){
-		
+		if (typeof digitalSignature == 'undefined')
 			digitalSignature = new DigitalSignature();
 			
 	});
 	
 	workBench.redact_modal.on('shown.bs.modal', function (){
-		
+		if (typeof redact == 'undefined')
 			redact = new Redact();
 			
 	});
 	
 	workBench.stamp_modal.on('shown.bs.modal', function (){
-		
+		if (typeof stamp == 'undefined')
 			stamp = new Stamp();
+			
+	});
+	
+	workBench.barcode_modal.on('shown.bs.modal', function (){
+			if (typeof barcode == 'undefined')
+				barcode = new Barcode();
 			
 	});
 	

@@ -10,19 +10,21 @@ function Main(){
 	/*this.fieldName				 = $('#fieldName');
 	this.fileName				 = $('#fileName');*/
 	//inputs
-	this.url_input	= $('#url_input');
-	this.uploaded_file = $('#uploaded_file');
+	this.url_input		= $('#url_input');
+	this.uploaded_file 	= $('#uploaded_file');
 	
 	//button
 	this.upload_pdf_btn = $('#upload_pdf_btn');	
-	this.confirm_yes = $('#confirm_yes');
-	this.urltoPDF_btn = $('#urltoPDF_btn');
+	this.confirm_yes 	= $('#confirm_yes');
+	this.urltoPDF_btn 	= $('#urltoPDF_btn');
+	this.btnExpiredOk	= $('#btnExpiredOk');
 	
 	//modal
-	this.confirmation_modal	= $('#confirmation_modal');
-	this.fileUploadModal 	= $('#fileUploadModal');
-	this.loading_modal		= $('#loading_modal');
-	this.errorModalDanger	= $('#errorModalDanger');
+	this.confirmation_modal		= $('#confirmation_modal');
+	this.fileUploadModal 		= $('#fileUploadModal');
+	this.loading_modal			= $('#loading_modal');
+	this.errorModalDanger		= $('#errorModalDanger');
+	this.session_expired_modal 	= $('#session_expired_modal');
 	
 	//DIV/span/label
 	this.fileUploadModal_body 	= $('#fileUploadModal_body');
@@ -149,32 +151,9 @@ Main.prototype.setEventListeners = function(event){
     	});		
 	});
 
-/*
-	main.urltoPDF_btn.on('click', function(){
-		var view_model = { url_input : main.url_input.val()};
-		
-		var url = main.config.urls.main.urlToPDF;
-		$.ajax(	{
-        	type: "post",
-        	url: url,		
-        	data: view_model,
-       		beforeSend: function( xhr ){  
-				main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});	 
-			},
-    		success: function( data ){
-				main.loading_modal.modal('hide');
-    			
-    			self.location = main.config.urls.root;
-    			//$('#tab'+nextTab).html( data ).append( new Client( main.loggedInIdentity, viewModel ) );
-    		},
-			error: function( objRequest, strError ){
-				main.loading_modal.modal('hide');
-        		console.log(objRequest);   
-        		console.log(strError);   
-        	},
-       	 	async: true
-    	});		
-	});*/
+	main.btnExpiredOk.on('click',function(){
+		self.location = main.config.urls.root;
+	});
 	
 	main.loading_modal.on('shown.bs.modal', function(){
 		

@@ -62,7 +62,13 @@
 		// create a function with the name of the environment so it can be executed if that environment is detected
 		// the value of the environment is a list of regex patterns to match the cgi.http_host.
 		environments = {
-			development = "localhost"
+			shirak = "^shirak",
+			Development = "localhost,^dev.,^local.,^dev,^local",
+			QA = "^QA.,^QA,^QA-",
+			Research = "^res.,^res",
+			Stage = "^stage.,^test.,^stg.,^stage,^test,^stg",
+			Prod = "^suite.,^suite,",
+			Secure = "^secure.,^secure,"
 		};
 
 		// Module Directives
@@ -104,7 +110,11 @@
 			//SES
 			{class="coldbox.system.interceptors.SES",
 			 properties={}
-			}
+			},
+			{class="interceptors.SecurityInterceptor", name="ApplicationSecurity", properties={
+				// Security properties go here.
+			}},
+			{ class = "interceptors.ExceptionHandler", properties = {} }
 		];
 
 		/*
@@ -148,8 +158,14 @@
 	/**
 	* Development environment
 	*/
-	function development(){
-		coldbox.customErrorTemplate = "/coldbox/system/includes/BugReport.cfm";
+	function shirak(){
+		coldbox.settings.email = { from='info@myacrobat.com', to='info@myacrobat.com' };
+		coldbox.reinitPassword = '';
+		coldbox.customErrorTemplate = "/includes/templates/Exception.cfm";
+		coldbox.debugMode = true;
+	    coldbox.debugPassword = "";
+		coldbox.handlersIndexAutoReload = true;
+		coldbox.settings.release = "1.0.0";
 	}
 	
 	

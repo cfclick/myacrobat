@@ -93,7 +93,11 @@ component{
 		if( len( local.pass )){
 			rc.hasPass = true;
 			rc.showerror = "Adding custom property feature is not availabale with password protected PDFs.";
-    		var fileOutputStream = CreateObject("java", "java.io.FileOutputStream").init( destination );
+    		
+			
+		}else{
+			rc.hasPass = false;
+			var fileOutputStream = CreateObject("java", "java.io.FileOutputStream").init( destination );
 			//Read the source
 			var reader = createobject("java","com.lowagie.text.pdf.PdfReader").init( source );
 			//reader.unethicalreading = true;
@@ -114,10 +118,6 @@ component{
 				   destination=source, mode="644");
 				   
 			cfpdf( action="getinfo" ,name="reader", source=source);
-			
-		}else{
-			rc.hasPass = false;
-			cfpdf( action="getinfo" ,name="reader", source=source, password=local.pass);
 		}
 		
 		rc.pdf = reader;				

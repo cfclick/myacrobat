@@ -33,6 +33,10 @@ function Config() {
 		 	add	: protocol + theActualServer + appFolder + CGIScriptName + "?event=redact.add"
 		 };
 		 
+		 this.urls.barcode = {
+		 	add	: protocol + theActualServer + appFolder + CGIScriptName + "?event=barcode.add"
+		 };
+		 
 		 this.urls.properties = {
 		 	index			: protocol + theActualServer + appFolder + CGIScriptName + "?event=properties.index",
 		 	add				: protocol + theActualServer + appFolder + CGIScriptName + "?event=properties.add",
