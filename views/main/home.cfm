@@ -17,7 +17,7 @@
 	}
 	
 </style>
-<div class="container ">
+<div class="container"  style="padding-top:55px">
 	<!--First row-->
 	<div class="row wow fadeIn" data-wow-delay="0.2s">
 		<div class="col-md-12">

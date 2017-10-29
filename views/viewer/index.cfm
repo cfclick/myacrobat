@@ -1,17 +1,17 @@
 ﻿<style>
 	.fluidMedia {
 	position: relative;
-	padding-bottom: 100.00%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
-	padding-top: 20px;
+	padding-bottom: 93%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
+	padding-top: 0px;
 	height: 0;
-	overflow: hidden;
+	overflow: auto;
 	}
 	.fluidMedia iframe {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
+	height: 95%;
 	}
 	.modal-heade-black{
 	color:#000000;
@@ -48,10 +48,11 @@
 	<input type="hidden" name="fileName" id="fileName" value="#rc.fileName#" />
 	<input type="hidden" name="passPdf" id="passPdf"  value="#rc.password#" />
 										
-	<div class="container" style="padding-top:10px">
+	<div class="container" style="padding-top:55px">
 	
 		<div class="row">
 			<div class="col-sm-2 col-md-2 col-lg-2">
+				<br><br><br>
 				<a href="#cgi.scRIPT_NAME#" class="btn orange darken-2 waves-effect btn-block" >
 					Home
 				</a>

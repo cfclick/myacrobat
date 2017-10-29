@@ -26,6 +26,7 @@
         body,
         .view {
             height: 100%;
+           
         }
         /* Navigation*/
         
@@ -33,7 +34,7 @@
             background-color: transparent;
         }
         
-        .scrolling-navbar {
+       /* .scrolling-navbar {
             -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
             -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
             transition: background .5s ease-in-out, padding .5s ease-in-out;
@@ -41,7 +42,7 @@
         
         .top-nav-collapse {
             background-color: #1C2331;
-        }
+        }*/
         
         footer.page-footer {
             background-color: #1C2331;
@@ -142,7 +143,7 @@
     <!--/.Footer-->
     
     <!--Double navigation-->
-<header>
+
     <!-- Sidebar navigation -->
     <ul id="slide-out" class="side-nav fixed custom-scrollbar" style="width:90px">
         <!-- Logo -->
@@ -253,22 +254,34 @@
         </ul>
     </nav>
     ---><!-- /.Navbar -->
-</header>
+
 <!--/.Double navigation-->
 
 <!--Main Layout-->
 
    
 <div class="view hm-black-light">
-	<div class="full-bg-img flex-center">   
-		<cfoutput><div class="container-fluid" >#renderView()#</div></cfoutput>           
-	</div>
-</div>
+        <div class="full-bg-img flex-center">   
+        	<cfoutput><div class="container-fluid" >#renderView()#</div></cfoutput>           
+        </div>
+    </div>
         
    
 
 <!--Main Layout-->
+<footer class="page-footer center-on-small-only">
+       <!--Footer links-->  
+        <hr class="orange darken-2">
+        <!--Copyright-->
+        <div class="footer-copyright">
+            <div class="container-fluid">
+                © 2017 Copyright: <a href="https://www.myacrobat.com"> myacrobat.com </a>
 
+            </div>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
 
     <!-- SCRIPTS -->
 
