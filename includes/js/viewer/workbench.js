@@ -81,7 +81,7 @@ WorkBench.prototype.setEventListeners = function(event){
     		success: function( data ){
     			setTimeout(function (){main.loading_modal.modal('hide');},1500);
 				
-				if( data.success )
+				if( data.success || data.SUCCESS )
 					self.location = main.config.urls.root;
 				else{
 					main.errorModalDanger.modal('show');
@@ -124,7 +124,7 @@ WorkBench.prototype.setEventListeners = function(event){
     			else
     				var fileName = data.FILENAME;
 			
-				if( data.success )
+				if( data.success || data.SUCCESS )
 					workBench.preview( fileName, true );
 				else{
 					main.errorModalDanger.modal('show');
@@ -214,7 +214,7 @@ WorkBench.prototype.setEventListeners = function(event){
 	    				var fileName = data.FILENAME;
 	    			
 					setTimeout(function (){main.loading_modal.modal('hide');},1500);
-					if( data.success )
+					if( data.success || data.SUCCESS )
 						workBench.preview( fileName, true );
 					else{
 						main.errorModalDanger.modal('show');

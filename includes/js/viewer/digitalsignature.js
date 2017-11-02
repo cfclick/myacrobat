@@ -60,7 +60,7 @@ DigitalSignature.prototype.setEventListeners = function(event){
 			    			else
 			    				var fileName = data.FILENAME;
 						
-							if( data.success ){
+							if( data.success || data.SUCCESS ){
 								workBench.preview( fileName, true );
 								toastr.info('Signature field will not show up if you are using Chrome/Firefox/Safari browesers! download the PDF and open it using Adobe Acrobat Reader.');
 							}else{

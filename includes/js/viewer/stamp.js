@@ -62,7 +62,7 @@ Stamp.prototype.setEventListeners = function(event){
 		    				else
 		    					var fileName = data.FILENAME;
 					
-							if( data.success ){
+							if( data.success || data.SUCCESS ){
 								workBench.preview( fileName, true );
 							}else{
 								main.errorModalDanger.modal('show');
