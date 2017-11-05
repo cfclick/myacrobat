@@ -17,14 +17,19 @@
 	}
 	
 </style>
+
+        <div class="flex-center">  
 <div class="container"  style="padding-top:55px">
+	 
+        	    
+        
 	<!--First row-->
 	<div class="row wow fadeIn" data-wow-delay="0.2s">
 		<div class="col-md-12">
 			<ul class="animated fadeInUp">
 				<li>
 					<center>
-					<img src="/includes//images/banner.png" align="center"/>
+					<img src="/includes/images/banner.png" align="center"/>
 					</center>
 				</li>
 				<!---<li>
@@ -105,6 +110,9 @@
 	</div>
 	
 </div>
+
+</div>
+
 <!--/.Main layout-->
     
    

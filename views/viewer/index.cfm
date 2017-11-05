@@ -1,7 +1,7 @@
 ﻿<style>
 	.fluidMedia {
 	position: relative;
-	padding-bottom: 93%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
+	padding-bottom: 56.25%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
 	padding-top: 0px;
 	height: 0;
 	overflow: auto;
@@ -11,7 +11,7 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 95%;
+	height: 100%;
 	}
 	.modal-heade-black{
 	color:#000000;
@@ -34,31 +34,45 @@
 <cfoutput>
 
 	<cfparam name="rc.password" type="string" default="">
-	
-	<div class="fixed-action-btn" style="padding-right:100px">
-		<a class="btn-floating peach-gradient"><i class="fa fa-leaf"></i></a>
+	<div class="fixed-action-btn" style="bottom: 45px; right: 224px;">
+    <a class="btn-floating btn-lg peach-gradient">
+        <i class="fa fa-leaf"></i>
+    </a>
 
-		<ul style="padding-right:100px">
-			<li><a id="restore_btn" href="##" class="btn-floating btn-sm bg-primary"><i class="fa fa-undo fa-lg" aria-hidden="true"></i></a></li>
-			<li><a id="delete_btn" href="##" class="btn-floating btn-sm orange"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></li>
-			<li><a id="email_btn" href="##" class="btn-floating btn-sm orange" data-toggle="modal" data-target="##myemail_modal"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-		</ul>
-	</div>
+    <ul>
+        <li><a id="restore_btn" href="##" class="btn-floating btn-sm bg-primary"><i class="fa fa-undo fa-lg" aria-hidden="true"></i></a></li>
+        <li><a id="delete_btn" href="##" class="btn-floating btn-sm orange"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></li>
+        <li><a id="email_btn" href="##" class="btn-floating btn-sm orange" data-toggle="modal" data-target="##myemail_modal"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+ 
+    </ul>
+</div>
+	<!---<div class="pull-right" style="padding-right:0px">
+		<!---<a class="btn-floating peach-gradient"><i class="fa fa-leaf"></i></a>--->
+
+		
+			<a id="restore_btn" href="##" class="btn-floating btn-sm bg-primary"><i class="fa fa-undo fa-lg" aria-hidden="true"></i></a>
+			<a id="delete_btn" href="##" class="btn-floating btn-sm orange"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
+			<a id="email_btn" href="##" class="btn-floating btn-sm orange" data-toggle="modal" data-target="##myemail_modal"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a>
+		
+	</div>--->
 
 	<input type="hidden" name="fileName" id="fileName" value="#rc.fileName#" />
 	<input type="hidden" name="passPdf" id="passPdf"  value="#rc.password#" />
 										
-	<div class="container" style="padding-top:55px">
+	<div class="container-fluid" >
 	
-		<div class="row">
-			<div class="col-sm-2 col-md-2 col-lg-2">
-				<br><br><br>
+		<!---<div class="row">--->
+			<!---<div class="col-sm-2 col-md-2 col-lg-2">
+				<br><br>
 				<a href="#cgi.scRIPT_NAME#" class="btn orange darken-2 waves-effect btn-block" >
 					Home
 				</a>
 				<button type="button" class="btn orange darken-2 waves-effect btn-block" data-toggle="modal" 
 				        data-target="##digital_signature_modal">
 					Signature
+				</button>
+				<button type="button" class="btn orange darken-2 waves-effect btn-block" data-toggle="modal" data-target="##password_modal">
+					Password
 				</button>
 				<button type="button" class="btn orange darken-2 waves-effect btn-block" data-toggle="modal" data-target="##redact_modal">
 					Redact
@@ -75,21 +89,21 @@
 				<button id="property_btn" type="button" class="btn orange darken-2 waves-effect btn-block" >
 					Properties
 				</button>
-			</div>
-			<div class="col-sm-10 col-md-10 col-lg-10">
+			</div>--->
+			<!---<div class="col-sm-12 col-md-12 col-lg-12">--->
 				
-				<div class="row wow fadeIn" data-wow-delay="0.4s">
-					<div class="col-sm-12 col-md-12 col-lg-12">						
+				<div class="row wow fadeIn" data-wow-delay="0.4s" >
+					<div class="col-sm-12 col-md-12 col-lg-12">					
 						<div class="fluidMedia">
-							<iframe id="pdf_iframe" src="#rc.homepage#?event=viewer.preview&fileName=#rc.fileName#" frameborder="0">
+							<iframe id="pdf_iframe" src="#rc.homepage#?event=viewer.preview&fileName=#rc.fileName###zoom=85" frameborder="0" >
 							</iframe>
 						</div>
 					</div>
 				</div>
 				
 				<br>
-			</div>
-		</div>
+			<!---</div>--->
+		<!---</div>--->
 	</div>
 	
 	<!-- ============================================ SIGNATURE MODAL 
@@ -113,9 +127,34 @@
 				<div class="modal-body" style="padding:40px 50px;">
 					<div class="row">
 						<form class="col-md-12">
-							<div class="row">
+							
+							
+							<div class="row pull-right">
 								<div class="md-form form-group form-sm">
-									<input type="text" id="d_x1" value="440" class="form-control" required="yes" style="width:40px"/>									       style="width:40px"/>
+									<input type="text" id="d_x2" value="570" class="form-control" required="yes" style="width:40px"/>
+									<label for="d_x2" data-error="invalid" data-success="valid">
+										x2
+									</label>
+								</div>
+								
+								<div class="md-form form-group form-sm">
+									<input type="text" id="d_y2" value="38" class="form-control" required="yes" style="width:40px"/>
+									<label for="d_y2" data-error="invalid" data-success="valid">
+										y2
+									</label>
+								</div>
+							</div>
+							<br>
+							<br>
+							<div class="row">
+								<div style="width:300px;height:100px;border:1px solid ##000;margin-left:40px">
+								</div>
+							</div>
+							<br>
+							<br>
+							<div class="row pull-left">
+								<div class="md-form form-group form-sm">
+									<input type="text" id="d_x1" value="440" class="form-control" required="yes" style="width:40px"/>
 									
 									<label for="d_x1" data-error="invalid" data-success="valid">
 										x1
@@ -123,34 +162,9 @@
 								</div>
 								
 								<div class="md-form form-group form-sm">
-									<input type="text" id="d_y1" value="75" class="form-control" required="yes"
-									       style="width:40px"/>
+									<input type="text" id="d_y1" value="75" class="form-control" required="yes" style="width:40px"/>
 									<label for="d_y1" data-error="invalid" data-success="valid">
 										y1
-									</label>
-								</div>
-							</div>
-							
-							<div class="row">
-								<div style="width:300px;height:100px;border:1px solid ##000;margin-left:40px">
-								</div>
-							</div>
-							<br>
-							<br>
-							<div class="row pull-right">
-								<div class="md-form form-group form-sm">
-									<input type="text" id="d_x2" value="570" class="form-control" required="yes"
-									       style="width:40px"/>
-									<label for="d_x2" data-error="invalid" data-success="valid">
-										x2
-									</label>
-								</div>
-								
-								<div class="md-form form-group form-sm">
-									<input type="text" id="d_y2" value="38" class="form-control" required="yes"
-									       style="width:40px"/>
-									<label for="d_y2" data-error="invalid" data-success="valid">
-										y2
 									</label>
 								</div>
 							</div>
@@ -192,6 +206,57 @@
 	<!-- ========================================END SIGNATURE MODAL============================================= -->
 	
 	
+	<!-- ================================================PASSWORD MODAL================================================== -->
+	<!-- Modal -->
+	<div class="modal fade right" id="password_modal" tabindex="-1" role="dialog"
+	     aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-full-height modal-right" role="document">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header text-center modal-heade-black">
+					<h4>
+						Password Protect 
+					</h4>
+					
+					<button type="submit" class="btn orange darken-2 pull-right" data-dismiss="modal">
+						X
+					</button>
+				</div>
+				<div class="modal-body" style="padding:40px 50px;">
+					
+					<form class="col-md-12">
+						
+						<div class="md-form form-group form-sm">
+							<input type="password" id="owner_pass" class="form-control" />
+							<label for="r_x1">
+								Owner Password
+							</label>
+						</div>
+							
+						<div class="md-form form-group form-sm">
+							<input type="password" id="user_password" class="form-control"/>
+							<label for="r_x2">
+								User Password
+							</label>
+						</div>
+
+					</form>
+					
+				</div>
+				<!--Footer-->
+				<div class="modal-footer">
+					<button type="button" id="password_apply_btn" class="btn orange darken-2 pull-right">
+						Apply
+					</button>
+				</div>
+				<!--/.Footer-->
+			</div>
+			<!-- /.Modal content-->
+		</div>
+	</div><!--/ Modal -->
+	<!-- ==============================================END PASSWORD MODAL================================================ -->
+	
+	
 	
 	<!-- ================================================REDACT MODAL================================================== -->
 	<!-- Modal -->
@@ -201,9 +266,7 @@
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header text-center modal-heade-black">
-					<h4>
-						<i class="fa fa-user">
-						</i>
+					<h4>					
 						Redact 
 					</h4>
 					
@@ -212,32 +275,10 @@
 					</button>
 				</div>
 				<div class="modal-body" style="padding:40px 50px;">
-					<div class="row">
+					
 						<form class="col-md-12">
-							<div class="row">
-								<div class="md-form form-group form-sm">
-									<input type="text" id="r_x1" value="440" class="form-control"
-									       style="width:40px"/>
-									<label for="r_x1">
-										x1
-									</label>
-								</div>
-								
-								<div class="md-form form-group form-sm">
-									<input type="text" id="r_y1" value="75" class="form-control"
-									       style="width:40px"/>
-									<label for="r_y1">
-										y1
-									</label>
-								</div>
-							</div>
 							
-							<div class="row">
-								<div style="width:300px;height:100px;border:1px solid ##000;margin-left:10px">
-								</div>
-							</div>
-							<br>
-							<br>
+							
 							<div class="row pull-right">
 								<div class="md-form form-group form-sm">
 									<input type="text" id="r_x2" value="570" class="form-control"
@@ -255,17 +296,49 @@
 									</label>
 								</div>
 							</div>
-							
+							<br>
+							<br>
 							<div class="row">
+								<div style="width:300px;height:100px;border:1px solid ##000;margin-left:10px">
+								</div>
+							</div>
+							<br>
+							
+							
+							<div class="row pull-left">
 								<div class="md-form form-group form-sm">
-									<input type="text" id="r_page" class="form-control" value="1" style="width:60px"/>
-									<label for="r_page">
-										Page Number
+									<input type="text" id="r_x1" value="440" class="form-control"
+									       style="width:40px"/>
+									<label for="r_x1">
+										x1
+									</label>
+								</div>
+								
+								<div class="md-form form-group form-sm">
+									<input type="text" id="r_y1" value="75" class="form-control"
+									       style="width:40px"/>
+									<label for="r_y1">
+										y1
 									</label>
 								</div>
 							</div>
+							<br>
+							<br>
+							<br>
+							<br>
+							
+							<div class="row pull-left">
+								
+									<div class="md-form form-group form-sm">
+										<input type="text" id="r_page" class="form-control" value="1" style="width:120px"/>
+										<label for="r_page">
+											Page Number
+										</label>
+									</div>
+								
+							</div>
 						</form>
-					</div>
+					
 				</div>
 				<!--Footer-->
 				<div class="modal-footer">
@@ -290,8 +363,6 @@
 			<div class="modal-content">
 				<div class="modal-header text-center modal-heade-black">
 					<h4>
-						<i class="fa fa-file">
-						</i>
 						Stamp
 					</h4>
 					<button type="submit" class="btn orange darken-2 pull-right" data-dismiss="modal">
@@ -301,31 +372,8 @@
 				<div class="modal-body" style="padding:40px 50px;">
 					<div class="row">
 						<form class="col-md-12">
-							<div class="row">
-								<div class="md-form form-group form-sm">
-									<input type="text" id="s_x1" value="100" class="form-control" required
-									       style="width:40px"/>
-									<label for="s_x1">
-										x1
-									</label>
-								</div>
-								
-								<div class="md-form form-group form-sm">
-									<input type="text" id="s_y1" value="775" class="form-control" required
-									       style="width:40px"/>
-									<label for="s_y1">
-										y1
-									</label>
-								</div>
-							</div>
 							
-							<div class="row">
-								<div style="width:300px;height:100px;border:1px solid ##000;margin-left:40px">
-									
-								</div>
-							</div>
-							<br>
-							<br>
+							
 							<div class="row pull-right">
 								<div class="md-form form-group form-sm">
 									<input type="text" id="s_x2" value="270" class="form-control" required
@@ -340,6 +388,33 @@
 									       style="width:40px"/>
 									<label for="s_y2">
 										y2
+									</label>
+								</div>
+							</div>
+							<br>
+							<br>
+							<div class="row">
+								<div style="width:300px;height:100px;border:1px solid ##000;margin-left:40px">
+									
+								</div>
+							</div>
+							
+							<br>
+							
+							<div class="row pull-left">
+								<div class="md-form form-group form-sm">
+									<input type="text" id="s_x1" value="100" class="form-control" required
+									       style="width:40px"/>
+									<label for="s_x1">
+										x1
+									</label>
+								</div>
+								
+								<div class="md-form form-group form-sm">
+									<input type="text" id="s_y1" value="775" class="form-control" required
+									       style="width:40px"/>
+									<label for="s_y1">
+										y1
 									</label>
 								</div>
 							</div>
