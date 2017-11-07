@@ -31,12 +31,16 @@ component {
 		
 		//Are we logging In		
 		//Login Check
-		if (  loggingIn  ){
-			//continue
-			    
-		} else if( not sessionStorage.exists("loggedin") or  sessionStorage.getVar("loggedin") == 'true' ){
-			rc.showerror = "Your session timed out2.";
-			Event.overrideEvent("Main.index");
+		if( loggingIn ){
+			//continue;
+		}else if( not sessionStorage.exists("loggedin") or  sessionStorage.getVar("loggedin") == 'true' ){
+			rc.showerror = "Your session timed out.";
+			if( event.isAjax() ){
+				cflocation(url="#CGI.scRIPT_NAME#");
+			}else{
+				Event.overrideEvent("Main.index");
+			}
+			
 		}
 	}
 	

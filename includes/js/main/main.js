@@ -17,6 +17,7 @@ function Main(){
 	this.confirm_yes 	= $('#confirm_yes');
 	this.urltoPDF_btn 	= $('#urltoPDF_btn');
 	this.btnExpiredOk	= $('#btnExpiredOk');
+	this.password_apply_btn = $('#password_apply_btn');
 	
 	//modal
 	this.confirmation_modal		= $('#confirmation_modal');
@@ -73,32 +74,7 @@ Main.prototype.setEventListeners = function(event){
 	    }
 	});*/
 
-	/*main.urltoPDF_btn.on('click', function(){
-		var view_model = { url_input : main.url_input.val()};
-		
-		var url = main.config.urls.main.urlToPDF;
-		$.ajax(	{
-        	type: "post",
-        	url: url,		
-        	data: view_model,
-       		beforeSend: function( xhr ){  
-       			main.action_label.html('Converting to PDF');
-				main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});	 
-			},
-    		success: function( data ){
-				main.loading_modal.modal('hide');
-    			
-    			self.location = main.config.urls.root;
-    			//$('#tab'+nextTab).html( data ).append( new Client( main.loggedInIdentity, viewModel ) );
-    		},
-			error: function( objRequest, strError ){
-				main.loading_modal.modal('hide');
-        		console.log(objRequest);   
-        		console.log(strError);   
-        	},
-       	 	async: true
-    	});		
-	});*/
+	
 
 	main.btnExpiredOk.on('click',function(){
 		self.location = main.config.urls.root;
@@ -108,26 +84,6 @@ Main.prototype.setEventListeners = function(event){
 	main.loading_modal.on('hidden.bs.modal', function () {
 	    $(this).data('bs.modal', null);
 	});
-	
-	/*main.fileUploadModal.on('shown.bs.modal', function (){
-	  	var url = main.config.urls.main.fileUploadForm;
-		$.ajax(	{
-        	type: "get",
-        	url: url,		
-       		beforeSend: function( xhr ){  	 
-			},
-    		success: function( data ){
-    			main.fileUploadModal_body.html(data);
-    			//$('#tab'+nextTab).html( data ).append( new Client( main.loggedInIdentity, viewModel ) );
-    		},
-			error: function( objRequest, strError ){
-        		console.log(objRequest);   
-        		console.log(strError);   
-        	},
-       	 	async: true
-    	});		
-	});*/
-	
 	
 	
 	main.confirmation_modal.on('shown.bs.modal', function (){

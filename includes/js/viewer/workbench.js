@@ -25,6 +25,7 @@ function WorkBench(){
 	this.redact_modal 			 = $('#redact_modal');
 	this.property_modal 		 = $('#property_modal');
 	this.email_modal			 = $('#email_modal');
+	this.password_modal			 = $('#password_modal');
 	
 	//other/DIV
 	this.pdf_iframe = $('#pdf_iframe');
@@ -57,6 +58,12 @@ WorkBench.prototype.setEventListeners = function(event){
 			
 	});
 	
+	workBench.password_modal.on('shown.bs.modal', function (){
+		if (typeof protect == 'undefined')
+			protect = new Protect();
+			
+	});
+	
 	workBench.barcode_modal.on('shown.bs.modal', function (){
 			if (typeof barcode == 'undefined')
 				barcode = new Barcode();
@@ -81,14 +88,18 @@ WorkBench.prototype.setEventListeners = function(event){
     		success: function( data ){
     			setTimeout(function (){main.loading_modal.modal('hide');},1500);
 				
-				if( data.success || data.SUCCESS )
-					self.location = main.config.urls.root;
-				else{
-					main.errorModalDanger.modal('show');
-					main.errorModalMessage.html(data);
+				var tp = $.type(data);
+						
+				if( tp === 'string'){
+					main.session_expired_modal.modal({show:true,backdrop: 'static',keyboard: false});
+				} else {
+					if( data.success || data.SUCCESS )
+						self.location = main.config.urls.root;
+					else{
+						main.errorModalDanger.modal('show');
+						main.errorModalMessage.html(data);
+					}
 				}
-    			
-    			//$('#tab'+nextTab).html( data ).append( new Client( main.loggedInIdentity, viewModel ) );
     		},
 			error: function( objRequest, strError ){
 				setTimeout(function (){main.loading_modal.modal('hide');},1500);

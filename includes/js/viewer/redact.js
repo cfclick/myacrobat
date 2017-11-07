@@ -45,30 +45,30 @@ Redact.prototype.setEventListeners = function(event){
 						  main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});	 
 					},
 		    		success: function( data ){
-		    			//setTimeout(function (){main.loading_modal.modal('hide');},1500);
-		    			//workBench.preview( fileName, true );
-		    			
+		    				
 		    			setTimeout(function (){main.loading_modal.modal('hide');},1500);
-		    			if(data.fileName)
-		    				var fileName = data.fileName;
-		    			else
-		    				var fileName = data.FILENAME;
-					
-						if( data.success || data.SUCCESS ){
-							workBench.preview( fileName, true );
+		    			
+		    			if (typeof data == 'string'){
+							main.session_expired_modal.modal('show');
 						}else{
-							main.errorModalDanger.modal('show');
-							if( data.showerror )
-								main.errorModalMessage.html(data.showerror);
-							else
-								main.errorModalMessage.html(data);
-						}
+							if(data.fileName)
+			    				var fileName = data.fileName;
+			    			else
+			    				var fileName = data.FILENAME;
 						
+							if( data.success || data.SUCCESS ){
+								workBench.preview( fileName, true );
+							}else{
+								main.errorModalDanger.modal('show');
+								if( data.showerror )
+									main.errorModalMessage.html(data.showerror);
+								else
+									main.errorModalMessage.html(data);
+							}
+						}	
 		    		},
 					error: function( objRequest, strError ){
-						setTimeout(function (){main.loading_modal.modal('hide');},1500);
-		        		console.log(objRequest);   
-		        		console.log(strError);   
+						setTimeout(function (){main.loading_modal.modal('hide');},1500);	        		
 		        	},
 		       	 	async: true
 		    	});		

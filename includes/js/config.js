@@ -6,15 +6,16 @@ function Config() {
 		var CGIScriptName = "";
 		
 		this.urls = {};
-		this.urls.main = { 
-	
+		this.urls.main = { 	
 			index 						: protocol + theActualServer + appFolder + CGIScriptName + "?event=main.index", 
-			fileUploadForm				: protocol + theActualServer + appFolder + CGIScriptName + "?event=main.fileUploadForm",
 			uploadFiles					: protocol + theActualServer + appFolder + CGIScriptName + "?event=main.uploadFiles",
-			passwordProtect				: protocol + theActualServer + appFolder + CGIScriptName + "?event=main.passwordProtect",
 			readMetadata				: protocol + theActualServer + appFolder + CGIScriptName + "?event=main.readMetadata",			
-			ping						: protocol + theActualServer + appFolder + CGIScriptName + "?event=main.ping",
-			urlToPDF					: protocol + theActualServer + appFolder + CGIScriptName + "?event=main.urlToPDF"
+			ping						: protocol + theActualServer + appFolder + CGIScriptName + "?event=main.ping"
+			
+		 };
+		 
+		 this.urls.protect = {
+		 	passwordProtect				: protocol + theActualServer + appFolder + CGIScriptName + "?event=protect.passwordProtect"
 		 };
 		 
 		 this.urls.digitalsignature = {

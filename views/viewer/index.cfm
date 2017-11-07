@@ -36,7 +36,7 @@
 	<cfparam name="rc.password" type="string" default="">
 	<div class="fixed-action-btn" style="bottom: 45px; right: 224px;">
     <a class="btn-floating btn-lg peach-gradient">
-        <i class="fa fa-leaf"></i>
+        <i class="fa fa-file"></i>
     </a>
 
     <ul>
@@ -147,10 +147,9 @@
 							<br>
 							<br>
 							<div class="row">
-								<div style="width:300px;height:100px;border:1px solid ##000;margin-left:40px">
+								<div style="width:280px;height:75px;border:1px solid ##000;margin-left:40px">
 								</div>
 							</div>
-							<br>
 							<br>
 							<div class="row pull-left">
 								<div class="md-form form-group form-sm">
@@ -234,11 +233,51 @@
 						</div>
 							
 						<div class="md-form form-group form-sm">
-							<input type="password" id="user_password" class="form-control"/>
+							<input type="password" id="user_pass" class="form-control"/>
 							<label for="r_x2">
 								User Password
 							</label>
 						</div>
+
+						<div class="md-form form-group form-sm"><!--class="mdb-select"-->
+							<select id="permissions_type" class="form-control" required multiple="multiple" >
+								<option value="" selected>Choose your option</option>
+									<option value="All">
+										All
+									</option>
+									<option value="AllowAssembly">
+										AllowAssembly
+									</option>
+									<option value="AllowDegradedPrinting">
+										AllowDegradedPrinting
+									</option>
+									<option value="AllowCopy">
+										AllowCopy
+									</option>
+									<option value="AllowFillIn">
+										AllowFillIn
+									</option>
+									<option value="AllowModifyAnnotations">
+										AllowModifyAnnotations
+									</option>
+									<option value="AllowModifyContents">
+										AllowModifyContents
+									</option>
+									<option value="AllowPrinting">
+										AllowPrinting
+									</option>
+									<option value="AllowScreenReaders">
+										AllowScreenReaders
+									</option>
+									<option value="AllowSecure">
+										AllowSecure
+									</option>
+									<option value="None">
+										None
+									</option>
+									
+								</select>
+							</div>
 
 					</form>
 					
@@ -299,7 +338,7 @@
 							<br>
 							<br>
 							<div class="row">
-								<div style="width:300px;height:100px;border:1px solid ##000;margin-left:10px">
+								<div style="width:280px;height:75px;border:1px solid ##000;margin-left:40px">
 								</div>
 							</div>
 							<br>
@@ -394,8 +433,7 @@
 							<br>
 							<br>
 							<div class="row">
-								<div style="width:300px;height:100px;border:1px solid ##000;margin-left:40px">
-									
+								<div style="width:280px;height:75px;border:1px solid ##000;margin-left:40px">
 								</div>
 							</div>
 							
@@ -660,6 +698,7 @@
 <script src="/includes/js/viewer/properties.js" 		type="application/javascript" ></script>
 <script src="/includes/js/viewer/stamp.js" 				type="application/javascript" ></script>
 <script src="/includes/js/viewer/barcode.js" 			type="application/javascript" ></script>
+<script src="/includes/js/viewer/protect.js" 			type="application/javascript" ></script>
 
 <script >
 
