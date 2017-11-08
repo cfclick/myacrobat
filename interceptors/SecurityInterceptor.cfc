@@ -25,6 +25,10 @@ component {
 				loggingIn = true;				
 		}
 		
+		if ( event.getCurrentEvent() == "viewer.render" ) {
+				loggingIn = true;				
+		}
+		
 		if ( event.getCurrentEvent() == "Main.uploadFiles" ) {
 				loggingIn = true;
 		}
