@@ -66,8 +66,9 @@ component{
 
 	function delete( event, rc, prc ){
 		
+		var noextFileName   = replace(rc.fileName, ".pdf", ""); 
 		rc.originalFile 	= application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\original\" & rc.fileName;
-		rc.thumbnailFolder 	= application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\thumbnail\";
+		rc.thumbnailFolder 	= application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\thumbnail\#noextFileName#\";
 		rc.tempWorkFile 	= GetTempDirectory() & session.sessionID & '\' & rc.fileName;
 		rc.workFile 		= application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\" & rc.fileName;
 

@@ -16,6 +16,9 @@
 	  	font-style:italic;
 	}
 	
+	h2 {
+    text-shadow: 2px 2px #000000;
+}
 </style>
 
         <div class="flex-center">  
@@ -38,9 +41,10 @@
 					</h1>
 				</li>--->
 				<li>
-					<h1>
-						The most powerful and free PDF Service for YOU!
-					</h1>
+					<h2>
+						This application is in beta version, feel free to play around. The services provided by myAcrobat.com on an "AS IS" BASIS.
+If you are interested in batch (production) services, please contact us at info@myacrobat.com
+					</h2>
 				</li>
 				<br><br>
 				<!---<li>

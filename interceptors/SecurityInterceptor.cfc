@@ -36,9 +36,14 @@ component {
 		}else if( not sessionStorage.exists("loggedin") or  sessionStorage.getVar("loggedin") == 'true' ){
 			rc.showerror = "Your session timed out.";
 			if( event.isAjax() ){
-				cflocation(url="#CGI.scRIPT_NAME#");
+				writelog( text="ERROR: session time out--- is AJAX")
+				setNextEvent( url="#CGI.scRIPT_NAME#?showerror=Your session timed out." );
+				//cflocation(url="#CGI.scRIPT_NAME#");
 			}else{
-				Event.overrideEvent("Main.index");
+				writelog( text="ERROR: session time out")
+				setNextEvent( url="#CGI.scRIPT_NAME#?showerror=Your session timed out." );
+				//cflocation(url="#CGI.scRIPT_NAME#");
+				//Event.overrideEvent("Main.index");
 			}
 			
 		}

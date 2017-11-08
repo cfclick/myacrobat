@@ -38,6 +38,7 @@ component{
 		
 	function add(event,rc,prc){		
 		
+		var pdfURL = application.cbcontroller.getconfigSettings().urls.workingpdf & session.sessionID & "/" & rc.fileName;
 		var destination = application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\" & rc.fileName;
 		rc.pathAndName = GetTempDirectory() & session.sessionID & '\' & rc.fileName;
 		var source = trim( rc.pathAndName );
@@ -57,11 +58,11 @@ component{
 			if( len( local.pass )){
 				rc.success = false;
 				rc.hasPass = true;
-				rc.showerror = "Adding custom property feature is not availabale with password protected PDFs.";
+				rc.showerror = "Adding barcode feature is not availabale with password protected PDFs.";
 				event.renderData( data=rc, type="json" ).nolayout();
 			
 			}else{
-					
+				rc.textToencode = pdfURL & "&text=#rc.textToencode#";	
 				if( len( rc.textToencode ) > 4296 )//maximum charaters for alpha numeric text
 					throw(message="Max characters reached.");
 				
@@ -81,7 +82,7 @@ component{
 					 , overwrite=true 
 					 , align="right"
 					 , image=img
-					 , bottommargin="1");
+					 , bottommargin="1.5");
 		 	 				
 	  			sleep(500);
 				filecopy(destination,source);

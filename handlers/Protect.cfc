@@ -64,21 +64,11 @@ component{
 			}
 			
 			if( len( local.pass )){
-				/*if( compare(local.pass,rc.owner_pass) == 0 ){
-					cfpdf( action="protect" 
-							,source=source
-							, newownerpassword=rc.owner_pass?:''
-							, newuserpassword = rc.user_pass?:''
-							, permissions = permissionList
-							, overwrite="yes"
-							, password=local.pass );
-					rc.success = true;	
-				}else{*/
+				
 					rc.hasPass = true;
 					rc.showerror = "The PDF already password protected.";
 					
 					rc.success = false;	
-				/*}*/
 			}else{
 				if( isdefined("rc.owner_pass") && len( rc.owner_pass ) && isdefined("rc.user_pass") && len( rc.user_pass )){
 					cfpdf( action="protect" 
@@ -89,8 +79,8 @@ component{
 						, permissions = permissionList
 						, overwrite="yes" );
 						
-						selectedPDF.password = rc.owner_pass;
-						selectedPDF.user_password = rc.user_pass;
+						selectedPDF[1].password = rc.owner_pass;
+						selectedPDF[1].user_password = rc.user_pass;
 		
 				}else if( isdefined("rc.owner_pass") && len( rc.owner_pass ) ){
 					
@@ -101,7 +91,7 @@ component{
 						, permissions = permissionList
 						, overwrite="yes" );
 						
-						selectedPDF.password = rc.owner_pass;
+						selectedPDF[1].password = rc.owner_pass;
 						
 					
 				}else if( isdefined("rc.user_pass") && len( rc.user_pass ) ){
@@ -114,24 +104,17 @@ component{
 						, password = local.pass
 						, overwrite="yes" );
 					
-					selectedPDF.user_password = rc.user_pass;
+					selectedPDF[1].user_password = rc.user_pass;
 				}
 				
 				rc.success = true;
+				sleep(500);
+				filecopy(destination,source);
 			}
-		}
 		
+		}
 		//TODO: Continue work on password
 		var files = sessionStorage.getVar('files');
-		result = arrayMap( files, function(ele){
-			if( ele.name == rc.fileName ){
-				ele.password = rc.owner_pass;
-			}
-		});
-
-		var myFiles = [];
-		myFiles.append( myPDF );
-		sessionStorage.setVar('files', myFiles );
 		rc["fileName"]= rc.fileName;
 		event.renderData(type='json',data=rc ).nolayout();
 

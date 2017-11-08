@@ -28,7 +28,7 @@
          {
             height: 100%;
             background-color:#2c2f34;
-            background: url("/includes/images/bg1.jpg")no-repeat center center fixed;
+            background: url("/includes/images/bg_o.jpg")no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -144,10 +144,9 @@
         <!--Social-->
        <li>
             <ul class="social">
-                <li><a class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a></li>
-                <li><a class="icons-sm pin-ic"><i class="fa fa-pinterest"> </i></a></li>
-                <li><a class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a></li>
-                <li><a class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
+            	<li><a href="https://www.facebook.com/sharer/sharer.php?u=I%20found%20free%20PDF%20app%20online%20https%3A//myacrobat.com%2F&amp;src=sdkpreparse" target="_blank" class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a></li>
+                <li><a href="https://plus.google.com/share?url=I%20found%20free%20PDF%20app%20online%20https%3A//myacrobat.com" target="_blank" class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?text=I%20found%20free%20PDF%20app%20online%20https%3A//myacrobat.com%20powered%20by%20%23ColdFusion" target="_blank" class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
             </ul>
         </li>
         <!--/Social-->
@@ -176,11 +175,11 @@
 							Signature
 						</a>
 	                </li>
-	                <li>
+	               <!--- <li>
 	                	<a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" data-target="##password_modal">
 							Password
 						</a>
-	                </li>
+	                </li>--->
 	                <li>
 	                	<a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" data-target="##redact_modal">
 							Redact
@@ -395,8 +394,9 @@
             </div>
             <!--Footer-->
             <div class="modal-footer">
-                <button type="button" class="btn orange darken-2" data-dismiss="modal">No</button>
-                <button id="confirm_yes" type="button" class="btn orange darken-2">Yes</button>
+            	<button id="confirm_yes" type="button" class="btn orange darken-3">Yes</button>
+                <button type="button" class="btn orange darken-1" data-dismiss="modal">No</button>
+                
             </div>
         </div>
         <!--/.Content-->
@@ -441,31 +441,29 @@
 
     <!--End Show Session Expire Warning Popup here -->
 
-    <!--Start Show Session Expire Popup here -->
+<!--Start Show Session Expire Popup here -->
 
-    <div class="modal fade" id="session_expired_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="session_expired_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
-        <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document">
 
-            <div class="modal-content">
+        <div class="modal-content">
 
-                <div class="modal-header">
+            <div class="modal-header">
 
-                    <h4 class="modal-title">Session Expired</h4>
+                <h4 class="modal-title">Session Expired</h4>
 
-                </div>
+            </div>
 
-                <div class="modal-body">
+            <div class="modal-body">
 
-                    Your session is expired.
+                Your session is expired.
 
-                </div>
+            </div>
 
-                <div class="modal-footer">
+            <div class="modal-footer">
 
-                    <button id="btnExpiredOk" onclick="sessionExpiredRedirect()" type="button" class="btn btn-primary" data-dismiss="modal" style="padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: normal; border: 1px solid transparent; border-radius: 4px; background-color: #428bca; color: #FFF;">Ok</button>
-
-                </div>
+                <button id="btnExpiredOk" onclick="sessionExpiredRedirect()" type="button" class="btn btn-primary" data-dismiss="modal" style="padding: 6px 12px; margin-bottom: 0; font-size: 14px; font-weight: normal; border: 1px solid transparent; border-radius: 4px; background-color: #428bca; color: #FFF;">Ok</button>
 
             </div>
 
@@ -473,25 +471,27 @@
 
     </div>
 
+</div>
+
 <!-- ================================================PROPERTIES MODAL================================================== -->
-	<!-- Modal -->
-	<div class="modal fade right" id="loading_modal" tabindex="-1" role="dialog"
-	     aria-labelledby="myModalLabel" aria-hidden="true">
-	     
-		<div class="modal-dialog modal-sm text-center justify-content-center" role="document">
-		<img src="/includes/images/ajax-loader.gif">
-			<span class="text-white" id='action_label'>Loading, please wait.</span>
-			<!-- Modal content-->
-			<!---<div class="modal-content text-center">
-				
-				<h3><span id='action_label'>Loading, please wait</span></h3>
-                <div class="progress primary-color-dark orange darken-2">
-                    <div class="indeterminate"></div>
-                </div>
-			</div>--->
-			<!-- /.Modal content-->
-		</div>
-	</div> <!--/ Modal -->
+<!-- Modal -->
+<div class="modal fade right" id="loading_modal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+     
+	<div class="modal-dialog modal-sm text-center justify-content-center" role="document">
+	<img src="/includes/images/ajax-loader.gif">
+		<span class="text-white" id='action_label'>Loading, please wait.</span>
+		<!-- Modal content-->
+		<!---<div class="modal-content text-center">
+			
+			<h3><span id='action_label'>Loading, please wait</span></h3>
+            <div class="progress primary-color-dark orange darken-2">
+                <div class="indeterminate"></div>
+            </div>
+		</div>--->
+		<!-- /.Modal content-->
+	</div>
+</div> <!--/ Modal -->
 	<!-- ==============================================END PROPERTIES MODAL================================================ -->
 
 
