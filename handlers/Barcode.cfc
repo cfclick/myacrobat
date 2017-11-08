@@ -38,7 +38,7 @@ component{
 		
 	function add(event,rc,prc){		
 		
-		var pdfURL = application.cbcontroller.getconfigSettings().urls.workingpdf & session.sessionID & "/" & rc.fileName;
+		var pdfURL = application.cbcontroller.getconfigSettings().urls.homepage & "?event=viewer.render&id=#session.sessionID#&fileName=#rc.fileName#";
 		var destination = application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\" & rc.fileName;
 		rc.pathAndName = GetTempDirectory() & session.sessionID & '\' & rc.fileName;
 		var source = trim( rc.pathAndName );

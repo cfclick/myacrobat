@@ -24,6 +24,20 @@ component{
 		}
 		
 	}
+	
+	function render( event, rc, prc ){
+				
+		rc.pathAndName = GetTempDirectory() & rc.ID & '\' & rc.fileName;
+		if( fileexists( rc.pathAndName ) ){
+			var binaryobj = filereadBinary( rc.pathAndName  );
+			var pdfArgs = { bookmark = "yes", backgroundVisible = "yes" };
+			event.renderData( data=binaryobj, type="PDF" ).nolayout();
+		}else{
+			     
+			throw(message:"file #rc.fileName# not found.");
+		}
+		
+	}
 
 
 	function restore( event, rc, prc ){
