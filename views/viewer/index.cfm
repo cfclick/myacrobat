@@ -661,9 +661,9 @@
 
 	$(document).ready( function() {
 		
-		//if( viewerIndex == 'undefined' )	
+		if (typeof workBench == 'undefined')	
 			workBench = new WorkBench();
 			
-			$('.mdb-select').material_select();
+		$('.mdb-select').material_select();
 	});
 </script>

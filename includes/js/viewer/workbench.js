@@ -145,7 +145,7 @@ WorkBench.prototype.setEventListeners = function(event){
     		},
 			error: function( objRequest, strError ){
 				setTimeout(function (){main.loading_modal.modal('hide');},1500);
-        		console.log(strError);   
+      
         	},
        	 	async: true
     	});		
@@ -188,8 +188,7 @@ WorkBench.prototype.setEventListeners = function(event){
 				
 					workBench.email_modal.modal('hide');
 					toastr.error('Unable to send the email.');
-	        		console.log(objRequest);   
-	        		console.log(strError);   
+
 	        	},
 	       	 	async: true
 	    	});	
@@ -202,49 +201,10 @@ WorkBench.prototype.setEventListeners = function(event){
 		
 		main.confirmation_modal.modal('show');
 		
-		main.confirm_yes.on('click', function(event){
-			var view_model = {
-				fileName:workBench.fileName.val(),
-				password:workBench.passPdf.val()
-			};
-	
-			var url = main.config.urls.sanitize.apply;
-			$.ajax(	{
-	        	type: "post",
-	        	url: url,		
-	        	data: view_model,
-	       		beforeSend: function( xhr ){ 
-	       			main.action_label.html('Sanitizing');
-	       			main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});
-				},
-	    		success: function( data ){
-	    		
-	    			if(data.fileName)
-	    				var fileName = data.fileName;
-	    			else
-	    				var fileName = data.FILENAME;
-	    			
-					setTimeout(function (){main.loading_modal.modal('hide');},1500);
-					if( data.success || data.SUCCESS )
-						workBench.preview( fileName, true );
-					else{
-						main.errorModalDanger.modal('show');
-						main.errorModalMessage.html(data);
-					}
-						
-	    			//$('#tab'+nextTab).html( data ).append( new Client( main.loggedInIdentity, viewModel ) );
-	    		},
-				error: function( objRequest, strError ){
-					setTimeout(function (){main.loading_modal.modal('hide');},1500);
-	        		main.errorModalDanger.modal('show');
-					main.errorModalMessage.html(objRequest);
-	        	},
-	       	 	async: true
-	    	});	
-	    	
-	    	main.confirmation_modal.modal('hide');	
-		});
+		
 	});
+	
+	
 	
 	workBench.property_btn.on('click', function(event){
 		

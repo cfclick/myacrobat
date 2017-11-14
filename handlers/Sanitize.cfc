@@ -46,11 +46,25 @@ component{
 		
 		//writeDump(destination);
 		//writeDump(source);abort;
-		cfpdf( action="sanitize" ,source=destination, overwrite="yes", password=selectedPDF[1].password );
-		cfpdf( action="sanitize" ,source=source, 	 overwrite="yes", password=selectedPDF[1].password );
-		rc.success = true;	
-		rc["fileName"]= rc.fileName;
-		event.renderData( data=rc, type="json" ).nolayout();
+		try
+        {
+        	cfpdf( action="sanitize" ,source=destination, overwrite="yes", password=selectedPDF[1].password );
+			cfpdf( action="sanitize" ,source=source, 	 overwrite="yes", password=selectedPDF[1].password );
+			rc.success = true;	
+			rc["fileName"]= rc.fileName;
+			event.renderData( data=rc, type="json" ).nolayout();
+        }
+        catch(Any e)
+        {
+        	if( comparenocase(e.message,"An error occurred during SANITIZE operation in the cfpdf tag.") == 0 ){
+        		rc.success = false;
+        		rc.showerror = "We are unble to Sanitize the PDF. It is possible the PDF already sanitized.";
+				event.renderData( data=rc, type="json" ).nolayout();
+        	}else{
+        		throw( e );
+        	}
+        }
+
 		
 	}	
 

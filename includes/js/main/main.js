@@ -43,39 +43,6 @@ Main.prototype.config = new Config();
 Main.prototype.setEventListeners = function(event){
 	
 
-	/*main.upload_pdf_btn.on('click', function(){
-		if( main.uploaded_file.val().length == 0 ){
-			toastr.error('Please select a file then upload.');			    			
-		}else{	
-			var view_model = { 'files[]' : main.uploaded_file.val()};
-			main.action_label.html('Uploading');
-			main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});
-			var url = main.config.urls.main.uploadFiles;
-			$.ajax(	{
-	        	type: "post",
-	        	url: url,		
-	        	data: view_model,
-	       		beforeSend: function( xhr ){  
-					main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});	 
-				},
-	    		success: function( data ){
-					main.loading_modal.modal('hide');
-	    			
-	    			self.location = main.config.urls.root;
-	    			//$('#tab'+nextTab).html( data ).append( new Client( main.loggedInIdentity, viewModel ) );
-	    		},
-				error: function( objRequest, strError ){
-					main.loading_modal.modal('hide');
-	        		console.log(objRequest);   
-	        		console.log(strError);   
-	        	},
-	       	 	async: true
-	    	});		
-	    }
-	});*/
-
-	
-
 	main.btnExpiredOk.on('click',function(){
 		self.location = main.config.urls.root;
 	});
@@ -90,6 +57,51 @@ Main.prototype.setEventListeners = function(event){
 		
 			redact = new Redact();
 			
+	});
+	
+	
+	main.confirm_yes.on('click', function(event){
+		var view_model = {
+			fileName:workBench.fileName.val(),
+			password:workBench.passPdf.val()
+		};
+
+		var url = main.config.urls.sanitize.apply;
+		$.ajax(	{
+        	type: "post",
+        	url: url,		
+        	data: view_model,
+       		beforeSend: function( xhr ){ 
+       			main.action_label.html('Sanitizing');
+       			main.loading_modal.modal({show:true,backdrop: 'static',keyboard: false});
+			},
+    		success: function( data ){
+    		
+    			if(data.fileName)
+    				var fileName = data.fileName;
+    			else
+    				var fileName = data.FILENAME;
+    			
+				setTimeout(function (){main.loading_modal.modal('hide');},1500);
+				if( data.success || data.SUCCESS )
+					workBench.preview( fileName, true );
+				else{
+					main.errorModalDanger.modal('show');
+					if( data.showerror )
+						main.errorModalMessage.html(data.showerror);
+					else
+						main.errorModalMessage.html(data);
+				}
+    		},
+			error: function( objRequest, strError ){
+				setTimeout(function (){main.loading_modal.modal('hide');},1500);
+        		main.errorModalDanger.modal('show');
+				main.errorModalMessage.html(objRequest);
+        	},
+       	 	async: true
+    	});	
+    	
+    	main.confirmation_modal.modal('hide');	
 	});
 	
 }
