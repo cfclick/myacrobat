@@ -20,7 +20,8 @@
     text-shadow: 2px 2px #000000;
 }
 </style>
-
+<p id="greeting">Loading ...</p>
+        <script src="../dist/bundle.js"></script>
         <div class="flex-center">  
 <div class="container"  style="padding-top:55px">
 	 
