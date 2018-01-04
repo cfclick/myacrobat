@@ -1,7 +1,7 @@
 function Config() { 
 		var config = this;
 		var theActualServer = window.location.host;//with port number
-		var protocol = "http://";
+		var protocol = window.location.protocol;
 		var appFolder = "/";
 		var CGIScriptName = "";
 		

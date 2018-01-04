@@ -341,10 +341,10 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="/includes/MDB/js/mdb.min.js"></script>
 
-	<script src="/includes/js/config.js"></script>
-	<script src="/includes/js/main/main.js"></script>
+	<!---<script src="/includes/js/config.js"></script>
+	<script src="/includes/js/main/main.js"></script>--->
 	<!---<script src="includes/js/main/sessionManager.js"></script>--->
-	
+	<script src="../dist/bundle.js"  ></script>
 	<script>
 	$(function() {
 		// activate all drop downs
@@ -357,11 +357,11 @@
 		$(document).ready( function() {
 			
 			$(".button-collapse").sideNav();
-			application = this;
+			//application = this;
 			
-			if( !application.main )
+			/*if( !application.main )
 				application.main = new Main();
-			
+			*/
 			/*if( !application.sessionManager )
 				application.sessionManager = new SessionManager();*/
 			

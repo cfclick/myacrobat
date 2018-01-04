@@ -120,7 +120,7 @@ If you are interested in batch (production) services, please contact us at info@
 </div>
 
 </div>
- <script src="../dist/bundle.js"  ></script>
+ 
 <!--/.Main layout-->
     
    

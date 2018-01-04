@@ -8,33 +8,13 @@ export class Config {
 
     constructor() {
         this.theActualServer = window.location.host;
-        this.protocol = "http://";
+        this.protocol = window.location.protocol;
         this.appFolder = "/";  
         this.CGIScriptName = "";
-        const path = this.protocol + this.theActualServer + this.appFolder + this.CGIScriptName;
+        const path = this.protocol + "//" + this.theActualServer + this.appFolder + this.CGIScriptName;
         
         this.urls = new MyUrls( path );
-       /*
-        //Digital Signature Handler
-        
-        //Stamp Handler
        
-        //Sanitize Handler
-       
-        //Redact Handler
-       
-        //Barcode Handler
-        
-        //Properties Handler
-        
-        //Viewer Handler
-        this.urls.viewer.preview    = path + "?event=viewer.preview";
-        this.urls.viewer.delete     = path + "?event=viewer.delete";
-        this.urls.viewer.restore    = path + "?event=viewer.restore";
-        this.urls.viewer.save       = path + "?event=viewer.save";
-        this.urls.viewer.email      = path + "?event=viewer.email";
-        //Root URL
-        this.urls.root.path         = path;*/
     }
 
 } 
@@ -65,6 +45,7 @@ class MyUrls{
     
 }
 
+//Digital Signature Handler
 class Main {
     index: string;
     uploadFiles: string;

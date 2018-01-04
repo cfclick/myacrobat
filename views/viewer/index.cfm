@@ -649,7 +649,7 @@
 	<!-- ==============================================END EMAIL MODAL================================================ -->
 </cfoutput>
 
-<script src="/includes/js/viewer/workbench.js" 			type="application/javascript" ></script>
+<!---<script src="/includes/js/viewer/workbench.js" 			type="application/javascript" ></script>--->
 <script src="/includes/js/viewer/digitalsignature.js" 	type="application/javascript" ></script>
 <script src="/includes/js/viewer/redact.js" 			type="application/javascript" ></script>
 <script src="/includes/js/viewer/properties.js" 		type="application/javascript" ></script>
@@ -661,9 +661,10 @@
 
 	$(document).ready( function() {
 		
-		if (typeof workBench == 'undefined')	
+		//workBenchStart();
+		/*if (typeof workBench == 'undefined')	
 			workBench = new WorkBench();
-			
+			*/
 		$('.mdb-select').material_select();
 	});
 </script>
