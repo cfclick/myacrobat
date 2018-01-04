@@ -20,8 +20,8 @@
     text-shadow: 2px 2px #000000;
 }
 </style>
-<p id="greeting">Loading ...</p>
-        <script src="../dist/bundle.js"></script>
+
+       
         <div class="flex-center">  
 <div class="container"  style="padding-top:55px">
 	 
@@ -48,6 +48,9 @@ If you are interested in batch (production) services, please contact us at info@
 					</h2>
 				</li>
 				<br><br>
+				<li>
+					<h2><p id="greeting">Loading ...</p></h2>
+				</li>
 				<!---<li>
 					<p>
 						Convert any website to PDF
@@ -117,7 +120,7 @@ If you are interested in batch (production) services, please contact us at info@
 </div>
 
 </div>
-
+ <script src="../dist/bundle.js"  ></script>
 <!--/.Main layout-->
     
    

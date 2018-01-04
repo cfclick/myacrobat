@@ -1,4 +1,8 @@
 "use strict";
 exports.__esModule = true;
 var greet_1 = require("./greet");
-console.log(greet_1.sayHello("Shirak Avakian"));
+function showHello(divName, name) {
+    var elt = document.getElementById(divName);
+    elt.innerText = greet_1.sayHello(name);
+}
+showHello("greeting", "Shirak");

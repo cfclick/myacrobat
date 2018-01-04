@@ -2,20 +2,20 @@ var gulp = require("gulp");
 var browserify = require("browserify");
 var source = require('vinyl-source-stream');
 var tsify = require("tsify");
-var paths = {
+/*var paths = {
     pages: ['views/main/*.cfm']
-};
+};*/
 
-gulp.task("copy-html", function () {
+/*gulp.task("copy-html", function () {
     return gulp.src(paths.pages)
         .pipe(gulp.dest("dist"));
-});
+});*/
 
-gulp.task("default", ["copy-html"], function () {
+gulp.task("default", [], function () {
     return browserify({
         basedir: '.',
         debug: true,
-        entries: ['includes/ts/main.ts'],
+        entries: ['includes/ts/home.ts'],
         cache: {},
         packageCache: {}
     })
