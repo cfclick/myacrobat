@@ -2,6 +2,8 @@ import { Config } from "./Config";
 import { Main }   from "./Main";
 import { WorkBench } from "./WorkBench";
 
+let confirmation_text: any;
+
 function start(path:string) {
 
     const elt2 = $("#greeting");

@@ -1,6 +1,10 @@
-import {Main} from "./Main"
-export class WorkBench extends Main{
+import { Config } from "./Config";
+import { Common } from "./Common";
+import {Base} from "./Base"
+export class WorkBench extends Base{
 
+    config: Config;
+    common: Common;
     reset_btn : any;
     delete_btn: any;
     email_btn: any;
@@ -10,8 +14,8 @@ export class WorkBench extends Main{
     property_btn: any;
 
     //inputs
-    fileName: any;
-    passPdf: any;
+   // fileName: any;
+   // passPdf: any;
     your_email: any;
     your_subject: any;
     your_message: any;
@@ -27,7 +31,7 @@ export class WorkBench extends Main{
     password_modal: any;
 
     //other/DIV
-    pdf_iframe: any;
+   // pdf_iframe: any;
     property_modal_body: any;
     attached_fileName: any;
 
@@ -43,8 +47,8 @@ export class WorkBench extends Main{
         this.property_btn = $('#property_btn');
 
         //inputs
-        this.fileName = $('#fileName');
-        this.passPdf = $('#passPdf');
+       // this.fileName = $('#fileName');
+      //  this.passPdf = $('#passPdf');
         this.your_email = $('#your_email');
         this.your_subject = $('#your_subject');
         this.your_message = $('#your_message');
@@ -60,14 +64,16 @@ export class WorkBench extends Main{
         this.password_modal = $('#password_modal');
 
         //other/DIV
-        this.pdf_iframe = $('#pdf_iframe');
+       // this.pdf_iframe = $('#pdf_iframe');
         this.property_modal_body = $('#property_modal_body');
         this.attached_fileName = $('#attached_fileName');
+        //this.common = super.getCommon();
         this.setEventListeners();
     }
 
-    public setEventListeners(event?: Event): void {
+    protected setEventListeners(event?: Event): void {
         
+        let common = super.getCommon();
    
         this.digital_signature_modal.on('shown.bs.modal', function () {
            //TODO: 
@@ -230,8 +236,8 @@ export class WorkBench extends Main{
 
 
         this.sanitize_btn.on('click', function (event: Event) {
-            this.confirmation_text.html('Are you sure you want to Sanitize the PDF?');
-            this.confirmation_modal.modal('show');
+            common.confirmation_text.html('Are you sure you want to Sanitize the PDF?');
+            common.confirmation_modal.modal('show');
         });
 
 
@@ -268,12 +274,12 @@ export class WorkBench extends Main{
         });
 
     }
-
+/*
     public preview( fileName:string, istemp:boolean ):void{
         let url = this.config.urls.viewer.preview + "&fileName=" + fileName + '&istemp=' + istemp;
         this.pdf_iframe.attr("src", url);
     }
-
+*/
     public ping(): string {
         return "WorkBench class constructed."
     }
