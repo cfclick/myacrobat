@@ -74,7 +74,7 @@
 		// Module Directives
 		modules = {
 			//Turn to false in production
-			autoReload = false,
+			autoReload = true,
 			// An array of modules names to load, empty means all of them
 			include = [],
 			// An array of modules names to NOT load, empty means none
@@ -113,8 +113,8 @@
 			},
 			{class="interceptors.SecurityInterceptor", name="ApplicationSecurity", properties={
 				// Security properties go here.
-			}},
-			{ class = "interceptors.ExceptionHandler", properties = {} }
+			}}/*,
+			{ class = "interceptors.ExceptionHandler", properties = {} }*/
 		];
 
 		/*
@@ -161,7 +161,7 @@
 	function shirak(){
 		coldbox.settings.email = { from='info@myacrobat.com', to='info@myacrobat.com' };
 		coldbox.reinitPassword = '';
-		coldbox.customErrorTemplate = "/includes/templates/Exception.cfm";
+		coldbox.customErrorTemplate = "/views/_templates/generic_error.cfm";
 		coldbox.debugMode = true;
 	    coldbox.debugPassword = "";
 		coldbox.handlersIndexAutoReload = true;

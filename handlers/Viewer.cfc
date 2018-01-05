@@ -116,9 +116,13 @@ component{
 	            mailerService.addParam(file= rc.workFile,type="text/plain",remove=false);         
 	            /* send mail using send(). Attribute values specified in an end action like "send" will not persist after the action is performed */ 
 	            mailerService.send(body=mailBody); 
-	            	        
-	    } 
-		event.renderData( data="success", type="json" ).nolayout();
+	            rc.success = true; 
+				event.renderData( data=rc, type="json" ).nolayout();        
+	    } else{
+			rc.success = false; 
+			event.renderData( data=rc, type="json" ).nolayout();  
+		}
+		
 	}
 		
 	

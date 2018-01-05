@@ -95,11 +95,11 @@
 		  	height: -webkit-calc(100%+ 60px);
 		  	height: calc(100%+ 60px);
 		  	height: -moz-calc(100%);
-		  	/*width: 100%;
+		  	width: 100%;
 		  	width: -webkit-calc(100%+ 60px);
 		  	width: calc(100%+ 60px);
 		  	width: -moz-calc(100%);
-		  	padding-bottom: 60px;*/
+		  	padding-bottom: 60px;
         }*/
         
         input[type=text],
@@ -222,7 +222,7 @@
 
    		<!--Main Layout-->
 		
-		        	<cfoutput><div class="conatiner-fluid"  >#renderView()#</div></cfoutput>           
+		        	<cfoutput><div class="conatiner-fluid" style="padding-left:230px" >#renderView()#</div></cfoutput>           
 		       
 <!--Main Layout-->
 

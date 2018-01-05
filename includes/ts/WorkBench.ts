@@ -1,6 +1,7 @@
 import { Config } from "./Config";
 import { Common } from "./Common";
-import {Base} from "./Base"
+import {Base} from "./Base";
+
 export class WorkBench extends Base{
 
     config: Config;
@@ -74,7 +75,9 @@ export class WorkBench extends Base{
     protected setEventListeners(event?: Event): void {
         
         let common = super.getCommon();
-   
+        let config = super.getConfig();
+        let workbench = this;
+
         this.digital_signature_modal.on('shown.bs.modal', function () {
            //TODO: 
            /* if (typeof digitalSignature == 'undefined')
@@ -112,40 +115,39 @@ export class WorkBench extends Base{
 
         this.delete_btn.on('click', function () {
 
-            var view_model = {
-                fileName: this.fileName.val()
+            let view_model = {
+                fileName: common.fileName.val()
             };
 
-            var url = this.config.urls.viewer.delete;
+            let url = config.urls.viewer.delete;
             $.ajax({
                 type: "post",
                 url: url,
                 data: view_model,
-                beforeSend: function (xhr) {
-                    this.action_label.html('Deleting the file');
-                    this.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
+                beforeSend: function (xhr:JQueryXHR) {
+                    common.action_label.html('Deleting the file');
+                    common.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
                 },
                 success: function (data) {
-                    setTimeout(function () { this.loading_modal.modal('hide'); }, 1500);
+                    setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
 
-                    var tp = $.type(data);
+                    let tp = $.type(data);
 
                     if (tp === 'string') {
-                        this.session_expired_modal.modal({ show: true, backdrop: 'static', keyboard: false });
+                        common.session_expired_modal.modal({ show: true, backdrop: 'static', keyboard: false });
                     } else {
                         if (data.success || data.SUCCESS){
-                            //TODO: self.location = this.config.urls.root;
-                            alert(this.config.urls.root);
+                            self.location.href = config.urls.root.path;
                         } else {
-                            this.errorModalDanger.modal('show');
-                            this.errorModalMessage.html(data);
+                            common.errorModalDanger.modal('show');
+                            common.errorModalMessage.html(data);
                         }
                     }
                 },
                 error: function (objRequest, strError) {
-                    setTimeout(function () { this.loading_modal.modal('hide'); }, 1500);
-                    this.errorModalDanger.modal('show');
-                    this.errorModalMessage.html(objRequest);
+                    setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
+                    common.errorModalDanger.modal('show');
+                    common.errorModalMessage.html(objRequest);
                 },
                 async: true
             });
@@ -156,20 +158,20 @@ export class WorkBench extends Base{
         this.restore_btn.on('click', function (event:Event) {
 
             var view_model = {
-                fileName: this.fileName.val()
+                fileName: common.fileName.val()
             };
 
-            var url = this.config.urls.viewer.restore;
+            var url = config.urls.viewer.restore;
             $.ajax({
                 type: "post",
                 url: url,
                 data: view_model,
-                beforeSend: function (xhr) {
-                    this.action_label.html('Restoring');
-                    this.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
+                beforeSend: function (xhr:JQueryXHR) {
+                    common.action_label.html('Restoring');
+                    common.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
                 },
                 success: function (data) {
-                    setTimeout(function () { this.loading_modal.modal('hide'); }, 1500);
+                    setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
 
                     if (data.fileName)
                         var fileName = data.fileName;
@@ -177,15 +179,15 @@ export class WorkBench extends Base{
                         var fileName = data.FILENAME;
 
                     if (data.success || data.SUCCESS)
-                        this.preview(fileName, true);
+                        workbench.preview(fileName, true);
                     else {
-                        this.errorModalDanger.modal('show');
-                        this.errorModalMessage.html(data);
+                        common.errorModalDanger.modal('show');
+                        common.errorModalMessage.html(data);
                     }
 
                 },
                 error: function (objRequest, strError) {
-                    setTimeout(function () { this.loading_modal.modal('hide'); }, 1500);
+                    setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
                 },
                 async: true
             });
@@ -193,40 +195,52 @@ export class WorkBench extends Base{
 
 
         this.email_btn.on('click', function () {
-            this.attached_fileName.html(this.fileName.val());
-            this.email_modal.modal('show');
+            workbench.attached_fileName.html(common.fileName.val());
+            workbench.email_modal.modal('show');
         });
 
 
         this.send_email_btn.on('click', function () {
 
-
-            var view_model = {
-                fileName: this.fileName.val(),
-                mailto: this.your_email.val(),
-                subject: this.your_subject.val(),
-                message: this.your_message.val()
+            let view_model = {
+                fileName: common.fileName.val(),
+                mailto: workbench.your_email.val(),
+                subject: workbench.your_subject.val(),
+                message: workbench.your_message.val()
             };
 
-            var url = this.config.urls.viewer.email;
+            let url = config.urls.viewer.email;
             $.ajax({
                 type: "post",
                 url: url,
                 data: view_model,
-                beforeSend: function (xhr) {
-                    this.email_modal.modal('hide');
-                    this.action_label.html('Emailing');
-                    this.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
+                beforeSend: function (xhr:JQueryXHR) {
+                    workbench.email_modal.modal('hide');
+                    common.action_label.html('Emailing');
+                    common.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
                 },
-                success: function (fileName) {
-                    setTimeout(function () { this.loading_modal.modal('hide'); }, 1500);
-                   //TODO:  toastr.info('Email has been sent.');
+                success: function (data) {
+                    setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
+
+                    let tp = $.type(data);
+
+                    if (tp === 'string') {
+                        common.errorModalDanger.modal('show');
+                        common.errorModalMessage.html(data);
+                    } else {
+                        if (data.success || data.SUCCESS) {
+                            toastr.info('Email has been sent.');
+                        } else {
+                            common.errorModalDanger.modal('show');
+                            common.errorModalMessage.html(data);
+                        }
+                    }
+                    
                 },
                 error: function (objRequest, strError) {
-                    setTimeout(function () { this.loading_modal.modal('hide'); }, 1500);
-
-                    this.email_modal.modal('hide');
-                   //TODO:  toastr.error('Unable to send the email.');
+                    setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
+                    workbench.email_modal.modal('hide');
+                    toastr.error('Unable to send the email.');
 
                 },
                 async: true

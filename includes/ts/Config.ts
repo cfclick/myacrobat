@@ -86,14 +86,14 @@ class Redact {
     add : string;
     
     constructor(_path: string) {
-        this.add = _path + "?event = redact.add";
+        this.add = _path + "?event=redact.add";
     }
 }
 
 class Barcode {
     add : string;
     constructor(_path: string) {
-    this.add = _path + "?event = barcode.add";
+    this.add = _path + "?event=barcode.add";
     }
 }
 
@@ -106,12 +106,12 @@ class Properties  {
     import: string;  
     
     constructor(_path: string) {
-        this.index  = _path + "?event = properties.index";
-        this.add    = _path + "?event = properties.add";
-        this.delete = _path + "?event = properties.delete";
-        this.save   = _path + "?event = properties.save";
-        this.export = _path + "?event = properties.export";
-        this.import = _path + "?event = properties.import";
+        this.index  = _path + "?event=properties.index";
+        this.add    = _path + "?event=properties.add";
+        this.delete = _path + "?event=properties.delete";
+        this.save   = _path + "?event=properties.save";
+        this.export = _path + "?event=properties.export";
+        this.import = _path + "?event=properties.import";
     }
 }
 
@@ -123,11 +123,11 @@ class Viewer {
     email: string;
     
     constructor(_path: string) {
-        this.preview    = _path + "?event = viewer.index";
-        this.delete     = _path + "?event = viewer.delete";
-        this.restore    = _path + "?event = viewer.save";
-        this.save       = _path + "?event = viewer.export";
-        this.email      = _path + "?event = viewer.import";
+        this.preview    = _path + "?event=viewer.preview";
+        this.delete     = _path + "?event=viewer.delete";
+        this.restore    = _path + "?event=viewer.restore";
+        this.save       = _path + "?event=viewer.save";
+        this.email      = _path + "?event=viewer.email";
     }
 
 }

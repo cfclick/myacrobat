@@ -1,5 +1,7 @@
 import { Common } from "./Common";
 import { Config } from "./Config";
+import * as toastr from "toastr";
+
 export abstract class Base {
     config:Config;
     constructor() {

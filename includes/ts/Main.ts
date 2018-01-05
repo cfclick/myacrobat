@@ -19,7 +19,7 @@ export class Main extends Base {
     fileUploadModal: any;
     //loading_modal: any;
     //errorModalDanger: any;
-    session_expired_modal: any;
+    //session_expired_modal: any;
 
     //DIV/span/label
     fileUploadModal_body: any;
@@ -45,7 +45,7 @@ export class Main extends Base {
         this.fileUploadModal = $('#fileUploadModal');
        // this.loading_modal = $('#loading_modal');
        // this.errorModalDanger = $('#errorModalDanger');
-        this.session_expired_modal = $('#session_expired_modal');
+      //  this.session_expired_modal = $('#session_expired_modal');
 
         //DIV/span/label
         this.fileUploadModal_body = $('#fileUploadModal_body');
