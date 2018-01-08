@@ -2,10 +2,12 @@ import { Config } from "./Config";
 import { Main }   from "./Main";
 import { WorkBench } from "./WorkBench";
 
+
 let confirmation_text: any;
+let globale_scope:any;
 
 function start(path:string) {
-
+    let gl = {};
     const elt2 = $("#greeting");
     let cfg = new Config();
     let main = new Main();
@@ -16,7 +18,7 @@ function start(path:string) {
     console.log(eventName);
     switch (eventName) {
         case 'viewer.workbench':{
-            workBenchStart();
+            gl = {'workbench': workBenchStart()};
             break;
         }
             
@@ -25,16 +27,20 @@ function start(path:string) {
             break;
     }
     elt2.html("Hello Shirak Avakian");
+
+    return gl;
 }
 
 function workBenchStart() {
     let workbench = new WorkBench();
-    console.log("Workbench started");
-    console.log(workbench.ping());
+   return workbench;
 }
 
+
 $(document).ready( function () {
-    start(window.location.pathname);
+
+    globale_scope =  start(window.location.pathname);
+    console.log(globale_scope.workbench);
 });
 /*
 $(function () {

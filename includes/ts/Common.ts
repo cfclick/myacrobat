@@ -8,6 +8,7 @@ export class Common {
     //input
     fileName: any;
     passPdf: any;
+    newuserpassword: any;
 
     //modal
     confirmation_modal: any;
@@ -33,6 +34,7 @@ export class Common {
         //input
         this.fileName = $('#fileName');
         this.passPdf  = $('#passPdf');
+        this.newuserpassword = $('#newuserpassword');
 
         //other
         this.pdf_iframe = $('#pdf_iframe');

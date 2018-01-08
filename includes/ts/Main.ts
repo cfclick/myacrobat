@@ -15,17 +15,10 @@ export class Main extends Base {
     password_apply_btn: any;
 
     //modal
-    //confirmation_modal: any;
-    fileUploadModal: any;
-    //loading_modal: any;
-    //errorModalDanger: any;
-    //session_expired_modal: any;
 
     //DIV/span/label
     fileUploadModal_body: any;
     preload_div: any;
-    //action_label: any;
-   // errorModalMessage: any;
 
     constructor() {
         super();      
@@ -41,18 +34,11 @@ export class Main extends Base {
         this.password_apply_btn = $('#password_apply_btn');
 
         //modal
-        //this.confirmation_modal = $('#confirmation_modal');
-        this.fileUploadModal = $('#fileUploadModal');
-       // this.loading_modal = $('#loading_modal');
-       // this.errorModalDanger = $('#errorModalDanger');
-      //  this.session_expired_modal = $('#session_expired_modal');
+
 
         //DIV/span/label
-        this.fileUploadModal_body = $('#fileUploadModal_body');
-        
+        this.fileUploadModal_body = $('#fileUploadModal_body');       
         this.preload_div = $("#preload_div");
-       // this.action_label = $("#action_label");
-       // this.errorModalMessage = $('#errorModalMessage');
        
         this.setEventListeners();
     }

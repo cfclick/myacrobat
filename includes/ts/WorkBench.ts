@@ -1,11 +1,24 @@
 import { Config } from "./Config";
 import { Common } from "./Common";
 import {Base} from "./Base";
+import { DigitalSignature } from "./DigitalSignature";
+import { Redact } from "./Redact";
+import { Stamp } from "./Stamp";
+import { Barcode } from "./Barcode";
+import { Properties } from "./Properties";
 
 export class WorkBench extends Base{
 
+    //classes
+    properties: Properties;
+    barcode : Barcode;
+    stamp : Stamp;
+    redact : Redact;
+    digitalSignature: DigitalSignature;
     config: Config;
     common: Common;
+
+    //buttons
     reset_btn : any;
     delete_btn: any;
     email_btn: any;
@@ -15,12 +28,9 @@ export class WorkBench extends Base{
     property_btn: any;
 
     //inputs
-   // fileName: any;
-   // passPdf: any;
     your_email: any;
     your_subject: any;
     your_message: any;
-
 
     //modals
     digital_signature_modal: any;
@@ -29,10 +39,8 @@ export class WorkBench extends Base{
     redact_modal: any;
     property_modal: any;
     email_modal: any;
-    password_modal: any;
 
     //other/DIV
-   // pdf_iframe: any;
     property_modal_body: any;
     attached_fileName: any;
 
@@ -48,12 +56,9 @@ export class WorkBench extends Base{
         this.property_btn = $('#property_btn');
 
         //inputs
-       // this.fileName = $('#fileName');
-      //  this.passPdf = $('#passPdf');
         this.your_email = $('#your_email');
         this.your_subject = $('#your_subject');
         this.your_message = $('#your_message');
-
 
         //modals
         this.digital_signature_modal = $('#digital_signature_modal');
@@ -62,13 +67,11 @@ export class WorkBench extends Base{
         this.redact_modal = $('#redact_modal');
         this.property_modal = $('#property_modal');
         this.email_modal = $('#email_modal');
-        this.password_modal = $('#password_modal');
 
         //other/DIV
-       // this.pdf_iframe = $('#pdf_iframe');
         this.property_modal_body = $('#property_modal_body');
         this.attached_fileName = $('#attached_fileName');
-        //this.common = super.getCommon();
+
         this.setEventListeners();
     }
 
@@ -79,37 +82,30 @@ export class WorkBench extends Base{
         let workbench = this;
 
         this.digital_signature_modal.on('shown.bs.modal', function () {
-           //TODO: 
-           /* if (typeof digitalSignature == 'undefined')
-                digitalSignature = new DigitalSignature();*/
+
+            if (typeof workbench.digitalSignature == 'undefined')
+                workbench.digitalSignature = new DigitalSignature();
 
         });
 
         this.redact_modal.on('shown.bs.modal', function () {
-           //TODO: 
-           /* if (typeof redact == 'undefined')
-                redact = new Redact();*/
+
+            if (typeof workbench.redact == 'undefined')
+                workbench.redact = new Redact();
 
         });
 
         this.stamp_modal.on('shown.bs.modal', function () {
-           //TODO: 
-           /* if (typeof stamp == 'undefined')
-                stamp = new Stamp();*/
 
-        });
-
-        this.password_modal.on('shown.bs.modal', function () {
-            //TODO: 
-            /*if (typeof protect == 'undefined')
-                protect = new Protect();*/
+            if (typeof workbench.stamp == 'undefined')
+                workbench.stamp = new Stamp();
 
         });
 
         this.barcode_modal.on('shown.bs.modal', function () {
-            //TODO: 
-            /*if (typeof barcode == 'undefined')
-                barcode = new Barcode();*/
+
+            if (typeof workbench.barcode == 'undefined')
+                workbench.barcode = new Barcode();
 
         });
 
@@ -258,42 +254,40 @@ export class WorkBench extends Base{
         this.property_btn.on('click', function (event: Event) {
 
             let view_model = {
-                fileName: this.fileName.val(),
-                password: this.passPdf.val()
+                fileName: common.fileName.val(),
+                password: common.passPdf.val()
             };
 
-            let url = this.config.urls.properties.index;
+            let url = config.urls.properties.index;
             $.ajax({
                 type: "post",
                 url: url,
                 data: view_model,
-                beforeSend: function (xhr) {
-                    this.action_label.html('Loading');
-                    this.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
+                beforeSend: function (xhr:JQueryXHR) {
+                    common.action_label.html('Loading');
+                    common.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
                 },
                 success: function (html) {
-                    setTimeout(function () { this.loading_modal.modal('hide'); }, 1500);
-                    this.property_modal_body.html(html);
-                    this.property_modal.modal('show');
-
-                   //TODO: properties = new Properties();
+                    setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
+                    workbench.property_modal_body.html(html);
+                    workbench.property_modal.modal('show');
+                    
+                    if (typeof workbench.properties == 'undefined')
+                        workbench.properties = new Properties();
                 },
                 error: function (objRequest, strError) {
                     setTimeout(function () { this.loading_modal.modal('hide'); }, 1500);
+                    common.errorModalDanger.modal('show');
+                    common.errorModalMessage.html(strError);
                 },
                 async: true
             });
 
-            this.confirmation_modal.modal('hide');
+            common.confirmation_modal.modal('hide');
         });
 
     }
-/*
-    public preview( fileName:string, istemp:boolean ):void{
-        let url = this.config.urls.viewer.preview + "&fileName=" + fileName + '&istemp=' + istemp;
-        this.pdf_iframe.attr("src", url);
-    }
-*/
+
     public ping(): string {
         return "WorkBench class constructed."
     }
