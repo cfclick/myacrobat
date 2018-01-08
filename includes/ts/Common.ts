@@ -7,6 +7,7 @@ export class Common {
 
     //input
     fileName: any;
+    fieldName: any;
     passPdf: any;
     newuserpassword: any;
 

@@ -4,21 +4,18 @@ import { WorkBench } from "./WorkBench";
 
 
 let confirmation_text: any;
-let globale_scope:any;
+let global_scope:any;
 
-function start(path:string) {
-    let gl = {};
+function start(path:string):any{
+   
     const elt2 = $("#greeting");
     let cfg = new Config();
     let main = new Main();
     let eventName = main.getParameterByName("event", window.location.href)
-    console.log(cfg.urls.main.index);
-    console.log(main.ping());
-    console.log(path);
-    console.log(eventName);
+   
     switch (eventName) {
         case 'viewer.workbench':{
-            gl = {'workbench': workBenchStart()};
+             global_scope = {'wb' : workBenchStart()};
             break;
         }
             
@@ -27,41 +24,18 @@ function start(path:string) {
             break;
     }
     elt2.html("Hello Shirak Avakian");
-
-    return gl;
+    return global_scope;
 }
 
 function workBenchStart() {
     let workbench = new WorkBench();
-   return workbench;
+    return workbench;
 }
 
 
 $(document).ready( function () {
 
-    globale_scope =  start(window.location.pathname);
-    console.log(globale_scope.workbench);
+    global_scope = start(window.location.pathname);  
+   // window.globalVar = "This is global!";
+
 });
-/*
-$(function () {
-    // activate all drop downs
-    $('.dropdown-toggle').dropdown();
-    // Tooltips
-    $("[rel=tooltip]").tooltip();
-});
-*/
-/*
-$(document).ready(function () {
-
-    $(".button-collapse").sideNav();
-    application = this;
-
-    if (!application.main)
-        application.main = new Main();
-
-    
-    $('.popover-dismiss').popover({
-        trigger: 'focus'
-    })
-
-});*/

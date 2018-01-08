@@ -32,7 +32,7 @@
 					</td>
 					<td>
 						<cfif isdefined("rc.hasPass") and not rc.hasPass >
-						<a id="del_cust_prop_btn" href="##" data-prop="#prop#" class="btn orange darken-2">delete</a>
+							<a id="del_cust_prop_btn_#prop#"  href="##" data-prop="#prop#" class="btn orange darken-2 del">delete</a>
 						</cfif>
 					</td>
 				</tr>

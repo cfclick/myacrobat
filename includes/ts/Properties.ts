@@ -29,7 +29,13 @@ export class Properties extends Base {
         this.save_properties_btn = $('#save_properties_btn');
         this.export_meta_btn     = $('#export_meta_btn');
         this.import_meta_btn     = $('#import_meta_btn');
-        this.del_cust_prop_btn   = $('#del_cust_prop_btn');
+        this.del_cust_prop_btn = $('.btn orange darken-2 del');
+        let divs:any = document.querySelectorAll('.btn orange darken-2 del');
+
+        [].forEach.call(divs, function (div:any) {
+            // do whatever
+            console.log(div);
+        });
 
         //divs
         this.custom_prop_div      = $('#custom_prop_div');
@@ -159,7 +165,7 @@ export class Properties extends Base {
         properties.del_cust_prop_btn.on('click', function(e:Event){
             let prop = $(this).data('prop');
             console.log(prop);
-        })
+        });
 
     }
 
