@@ -3,7 +3,7 @@ import { Base } from "./Base";
 export class Main extends Base {
    // main:this;
     config:Config;
-    newuserpassword: any;
+   
     url_input : any;
     uploaded_file: any;
 
@@ -22,7 +22,7 @@ export class Main extends Base {
 
     constructor() {
         super();      
-        this.newuserpassword = $('#newuserpassword');
+        
         this.url_input = $('#url_input');
         this.uploaded_file = $('#uploaded_file');
 
