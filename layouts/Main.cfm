@@ -344,8 +344,10 @@
 	<!---<script src="/includes/js/config.js"></script>
 	<script src="/includes/js/main/main.js"></script>--->
 	<!---<script src="includes/js/main/sessionManager.js"></script>--->
-	<script src="../dist/bundle.js"  ></script>
+	
 	<script>
+    CONTACT_DATA =[];
+    GLOBALSCOPE = null;
 	$(function() {
 		// activate all drop downs
 		$('.dropdown-toggle').dropdown();
@@ -368,10 +370,14 @@
 			$('.popover-dismiss').popover({
 				  trigger: 'focus'
 				})
+
+            
+           // console.log(WorkBench_1);
+            
 			
 		});
 	</script>
-
+<script src="../dist/bundle.js"  ></script>
 <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
 <!--[if (gte IE 8)&(lt IE 10)]>
 <script src="js/cors/jquery.xdr-transport.js"></script>

@@ -3,10 +3,14 @@ import { Config } from "./Config";
 import * as toastr from "toastr";
 
 export abstract class Base {
+
     config:Config;
+    common:Common;
+
     constructor() {
         let base = this;
         this.config = new Config();
+        this.common = new Common();
     }
 
     public preview(fileName: string, istemp: boolean): void {
@@ -15,11 +19,15 @@ export abstract class Base {
     }
 
     public getConfig():Config{
+        if (typeof this.config == 'undefined')
+            this.config = new Config();
         return this.config;
     }
 
     public getCommon():Common{
-        return new Common();
+        if (typeof this.common == 'undefined')
+            this.common = new Common();
+        return this.common;
     }
 
     public getParameterByName(name:string, url:string):string {

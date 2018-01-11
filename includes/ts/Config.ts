@@ -104,6 +104,7 @@ class Properties  {
     save: string; 
     export: string;        
     import: string;  
+    readCustomerProperties: string;
     
     constructor(_path: string) {
         this.index  = _path + "?event=properties.index";
@@ -112,6 +113,7 @@ class Properties  {
         this.save   = _path + "?event=properties.save";
         this.export = _path + "?event=properties.export";
         this.import = _path + "?event=properties.import";
+        this.readCustomerProperties = _path + "?event=properties.readCustomerProperties";
     }
 }
 

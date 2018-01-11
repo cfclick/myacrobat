@@ -1,3 +1,6 @@
+
+import { Common } from "./Common";
+import { Config } from "./Config";
 import { Base } from "./Base";
 
 export class Properties extends Base {
@@ -20,6 +23,9 @@ export class Properties extends Base {
     author_input        : any;
     subject_input       : any;
     keywords_input      : any;
+    
+    //Other
+    arrayof_deletebtn_id: string[];
 
     constructor() {
         super();
@@ -30,13 +36,7 @@ export class Properties extends Base {
         this.export_meta_btn     = $('#export_meta_btn');
         this.import_meta_btn     = $('#import_meta_btn');
         this.del_cust_prop_btn = $('.btn orange darken-2 del');
-        let divs:any = document.querySelectorAll('.btn orange darken-2 del');
-
-        [].forEach.call(divs, function (div:any) {
-            // do whatever
-            console.log(div);
-        });
-
+     
         //divs
         this.custom_prop_div      = $('#custom_prop_div');
         this.main_properties_body = $('#main_properties_body');
@@ -48,6 +48,8 @@ export class Properties extends Base {
         this.author_input       = $('#author_input');
         this.subject_input      = $('#subject_input');
         this.keywords_input     = $('#keywords_input');
+        //Other
+        this.arrayof_deletebtn_id = new Array();
 
         this.setEventListeners();
     }
@@ -169,12 +171,12 @@ export class Properties extends Base {
 
     }
 
-    public deleteCustomProperty(prop:any):void {
+    public deleteCustomProperty(event:any):void {
 
-        let common      = super.getCommon();
-        let config      = super.getConfig();
-        let properties  = this;
-
+        let common:Common = super.getCommon();
+        let config:Config = super.getConfig();
+        let properties    = new Properties();
+        let prop =  $(this).attr("data-prop");
         let view_model = {
             fileName: common.fileName.val(),
             name: prop
@@ -190,9 +192,23 @@ export class Properties extends Base {
                 common.action_label.html('Deleting');
                 common.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
             },
-            success: function (html) {
-                setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
-                properties.custom_prop_div.html(html);
+            success: function (data) {
+                let tp = $.type(data);
+
+                if (tp === 'string') {
+                    $('#here_table').html('');
+                    common.errorModalDanger.modal('show');
+                    common.errorModalMessage.html(data);
+                } else {
+                    if (data.success || data.SUCCESS) {
+                        $('#here_table').html('');
+                        properties.renderCustomProperties(data);
+                    }else{
+                        setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
+                        $('#here_table').html('Unable to load custom properties');
+                        toastr.danger('Unable to load custom properties');
+                    }
+                }
             },
             error: function (objRequest, strError) {
                 setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
@@ -201,6 +217,89 @@ export class Properties extends Base {
             },
             async: true
         });
+    }
+
+    public renderCustomProperties(data: any): void {
+        
+        let common = super.getCommon();
+        let config = super.getConfig();
+        let properties = this;
+
+        $('#here_table').html('');
+        let table = $('<table></table>').addClass('table');
+        let thead = $('<thead></thead>').addClass('mdb-color darken-3');
+        let htr = $('<tr></tr>').addClass('text-white');
+        let hth = $('<th>##</th><th>Name</th><th>Value</th>');
+        htr.append(hth);
+        thead.append(htr);
+        table.append(thead);
+        let tbody = $('<tbody></tbody>');
+
+        $.each(data.pdf.Properties, function (key: string, value: string) {
+            let btn_id = 'del_cust_' + key;
+            properties.arrayof_deletebtn_id.push(btn_id);
+            let row = $('<tr><td>' + key + '</td><td>' + value + '</td><td><button data-prop=' + key +' id="' + btn_id + '">Delete</button></td></tr>');
+            tbody.append(row);
+            table.append(tbody);
+
+        });
+
+
+        $('#here_table').append(table);
+
+        $.each(properties.arrayof_deletebtn_id, function (index, value) {
+            $('#' + value).click({ value }, properties.deleteCustomProperty);
+        });
+
+        setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
+    }
+
+    public readCustomProperties(data?:any):void{
+
+        let common = super.getCommon();
+        let config = super.getConfig();
+        let properties = this;
+
+        let view_model = {
+            fileName: common.fileName.val(),
+            password: common.passPdf.val()
+        };
+        let url2 = config.urls.properties.readCustomerProperties;
+        $.ajax({
+            type: "post",
+            url: url2,
+            data: view_model,
+            beforeSend: function (xhr: JQueryXHR) {
+                $('#here_table').html('Loading...');
+            },
+            success: function (data) {
+
+                let tp = $.type(data);
+
+                if (tp === 'string') {
+                    $('#here_table').html('');
+                    common.errorModalDanger.modal('show');
+                    common.errorModalMessage.html(data);
+                } else {
+                    if (data.success || data.SUCCESS) {
+                        properties.renderCustomProperties(data);
+                        setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
+
+                    } else {
+                        setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
+                        $('#here_table').html('Unable to load custom properties');
+                        toastr.danger('Unable to load custom properties');
+                    }
+                }
+
+            }, error: function (objRequest, strError) {
+
+                $('#here_table').html(strError);
+            },
+            async: true
+        });
+
+       
     }
 
     private reinitInputs():void {

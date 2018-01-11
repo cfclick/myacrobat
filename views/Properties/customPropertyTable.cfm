@@ -1,5 +1,6 @@
 <cfoutput>
-	<table class="table">
+<div id="here_table"></div>
+	<!---<table class="table">
 	
 		<!--Table head-->
 		<thead class="mdb-color darken-3">
@@ -21,6 +22,7 @@
 		
 		<!--Table body-->
 		<cfif isdefined("rc.pdf.Properties") and isStruct( rc.pdf.Properties ) >
+		
 		<tbody>
 			<cfloop collection="#rc.pdf.Properties#" item="prop">
 				<tr>
@@ -40,5 +42,9 @@
 		</tbody>
 		</cfif>
 		<!--Table body-->
-	</table><!--Table-->
+	</table><!--Table-->--->
 </cfoutput>
+<script>
+wb = workBenchStart();
+console.log(wb)
+</script>

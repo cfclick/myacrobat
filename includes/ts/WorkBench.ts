@@ -43,6 +43,7 @@ export class WorkBench extends Base{
     //other/DIV
     property_modal_body: any;
     attached_fileName: any;
+    //arrayof_deletebtn_id : string[];
 
     constructor(){
         super();
@@ -71,6 +72,7 @@ export class WorkBench extends Base{
         //other/DIV
         this.property_modal_body = $('#property_modal_body');
         this.attached_fileName = $('#attached_fileName');
+       // this.arrayof_deletebtn_id = new Array();
 
         this.setEventListeners();
     }
@@ -107,6 +109,16 @@ export class WorkBench extends Base{
             if (typeof workbench.barcode == 'undefined')
                 workbench.barcode = new Barcode();
 
+        });
+
+        this.property_modal.on('shown.bs.modal', function(){
+            
+           /* if (typeof workbench.properties == 'undefined')
+                workbench.properties = new Properties();
+            */
+            /*$.each(workbench.arrayof_deletebtn_id, function (index,value) {
+                $('#' + value).click({value}, workbench.properties.deleteCustomProperty);
+            })*/
         });
 
         this.delete_btn.on('click', function () {
@@ -270,10 +282,80 @@ export class WorkBench extends Base{
                 success: function (html) {
                     setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
                     workbench.property_modal_body.html(html);
-                    workbench.property_modal.modal('show');
+
+                    let url2 = config.urls.properties.readCustomerProperties;
+                    $.ajax({
+                        type: "post",
+                        url: url2,
+                        data: view_model,
+                        beforeSend: function (xhr: JQueryXHR) {
+                            $('#here_table').html('Loading...');
+                        },
+                        success: function (data) {
+                            
+                            let tp = $.type(data);
+
+                            if (tp === 'string') {
+                                $('#here_table').html('');
+                                common.errorModalDanger.modal('show');
+                                common.errorModalMessage.html(data);
+                            } else {
+                                if (data.success || data.SUCCESS) {   
+                                    if (typeof workbench.properties == 'undefined')
+                                        workbench.properties = new Properties();
+
+                                    workbench.properties.readCustomProperties();
+                                   /* $('#here_table').html('');
+                                    let table = $('<table></table>').addClass('table');
+                                    let thead = $('<thead></thead>').addClass('mdb-color darken-3');
+                                    let htr = $('<tr></tr>').addClass('text-white');
+                                    let hth = $('<th>##</th><th>Name</th><th>Value</th>');
+                                    htr.append(hth);
+                                    thead.append(htr);
+                                    table.append(thead);
+                                    let tbody = $('<tbody></tbody>');
+
+                                    $.each(data.pdf.Properties, function (key: string, value: string) {
+                                        let btn_id = 'del_cust_' + key;
+                                        workbench.arrayof_deletebtn_id.push( btn_id );
+                                        let row = $('<tr><td>' + key + '</td><td>' + value + '</td><td><button id="' + btn_id + '">Delete</button></td></tr>');
+                                        tbody.append(row);
+                                        let catEl = document.getElementById('"' + btn_id + '"');
+                                        table.append(tbody);
+
+                                    });
+                                    
+                                    
+                                    $('#here_table').append(table);
+                                    */
+                                } else {
+                                    $('#here_table').html('Unable to load custom properties');
+                                    toastr.danger('Unable to load custom properties');
+                                }
+                            }
+
+                        }, error: function (objRequest, strError) {
+                           
+                            $('#here_table').html(strError);
+                        },
+                        async: true
+                    });
+
                     
-                    if (typeof workbench.properties == 'undefined')
-                        workbench.properties = new Properties();
+               /*
+                    for (i = 0; i < 3; i++) {
+                        var row = $('<tr></tr>').addClass('bar').text('result ' + i);
+                        table.append(row);
+                    }*/
+
+                   
+                    
+                    workbench.property_modal.modal('show');
+
+                   
+                   
+                   /* if (typeof workbench.properties == 'undefined')
+                        workbench.properties = new Properties();*/
                 },
                 error: function (objRequest, strError) {
                     setTimeout(function () { this.loading_modal.modal('hide'); }, 1500);
@@ -288,7 +370,10 @@ export class WorkBench extends Base{
 
     }
 
-    public ping(): string {
+    public ping( prop:string ): string {
+        let workbench = this;
+        console.log('ping clicked');
+        workbench.properties.deleteCustomProperty(prop);
         return "WorkBench class constructed."
     }
 }

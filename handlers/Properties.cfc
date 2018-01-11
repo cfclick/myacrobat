@@ -40,7 +40,45 @@ component{
 		var destination = application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\" & rc.fileName;
 		rc.pathAndName = GetTempDirectory() & session.sessionID & '\' & rc.fileName;
 		var source = trim( rc.pathAndName );
-		//writeDump(sessionStorage.getVar('files'));abort;
+
+		if( isArray( sessionStorage.getVar('files') ) ){
+			var selectedPDF = arrayfilter(sessionStorage.getVar('files'), function(ele){
+				return ele.name == rc.fileName;
+			});
+			
+			local.pass = selectedPDF[1].password;
+			
+		}else{
+			local.pass = "";
+		}
+		
+		if( fileExists( source) ){
+			if( len( local.pass )){
+				rc.hasPass = true;
+				rc.showerror = "Adding custom property feature is not availabale with password protected PDFs.";
+				cfpdf( action="getinfo" ,name="reader", source=source, password=local.pass);
+			}   			
+	   		else
+	   			cfpdf( action="getinfo" ,name="reader", source=source);
+   						
+			reader.Created = formatPDFdate( reader.Created );
+			reader.Modified = formatPDFdate( reader.Modified );
+			rc.pdf = reader;
+			
+			rc.Created = "D:" & DateFormat(now(), "YYYYMMDD") & TimeFormat(now(), "HHmmss") & "-00'00'";			
+			event.setView("Properties/index").nolayout();
+			
+		}else{			
+			event.renderData( data="File #rc.fileName# not found.", type="json" ).nolayout();
+		}
+		
+	}	
+
+	function readCustomerProperties( event, rc, prc ){
+		var destination = application.cbcontroller.getconfigSettings().workFolder & session.sessionID & "\" & rc.fileName;
+		rc.pathAndName = GetTempDirectory() & session.sessionID & '\' & rc.fileName;
+		var source = trim( rc.pathAndName );
+
 		if( isArray( sessionStorage.getVar('files') ) ){
 			var selectedPDF = arrayfilter(sessionStorage.getVar('files'), function(ele){
 				return ele.name == rc.fileName;
@@ -66,13 +104,14 @@ component{
 			rc.pdf = reader;
 			
 			rc.Created = "D:" & DateFormat(now(), "YYYYMMDD") & TimeFormat(now(), "HHmmss") & "-00'00'";
-			
-			event.setView("Properties/index").nolayout();
-		}else{			
-			event.renderData( data="File #rc.fileName# not found.", type="json" ).nolayout();
+			rc.success = true;
+			event.renderData( data=rc, type="json" ).nolayout();
+		}else{		
+			rc.success = false;	
+			event.renderData( data=rc, type="json" ).nolayout();
 		}
-		
-	}	
+
+	}
 	
 	function add( event, rc, prc ){
 		
@@ -151,7 +190,8 @@ component{
    		cfpdf( action="getinfo" ,name="reader", source=source);
 		rc.pdf = reader;
 		
-		event.setView("Properties/customPropertyTable").nolayout();
+		rc.success = true;
+		event.renderData( data=rc, type="json" ).nolayout();
 	}
 	
 	
