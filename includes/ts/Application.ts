@@ -26,7 +26,7 @@ function start(path:string):void{
         default:
             break;
     }
-    elt2.html("Hello Shirak Avakian");
+    elt2.html("");
     
 }
 
@@ -54,10 +54,10 @@ class ContactLogger{
         }
     }
 }
-
+/*
 window.onload = () =>{
     ContactLogger.logContactData();
-}
+}*/
 
 $(document).ready( function () {
 

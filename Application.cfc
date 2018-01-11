@@ -11,6 +11,13 @@ component{
 	this.sessionTimeout = createTimeSpan(0,0,15,30);
 	this.setClientCookies = true;
 
+	this.rootDir = getDirectoryFromPath( getCurrentTemplatePath() );
+	this.mappings[ "/modules" ] = "#this.rootDir#modules/";
+    this.mappings[ "/cbvalidation" ] = "#this.rootDir#modules/cbvalidation/";
+    this.mappings[ "/cbmessagebox" ] = "#this.rootDir#modules/cbmessagebox/";
+    this.mappings[ "/cbi18n" ] = "#this.rootDir#modules/cbi18n/";
+    this.mappings[ "/cbstorages" ] = "#this.rootDir#modules/cbstorages/";
+
 	// COLDBOX STATIC PROPERTY, DO NOT CHANGE UNLESS THIS IS NOT THE ROOT OF YOUR COLDBOX APP
 	COLDBOX_APP_ROOT_PATH = getDirectoryFromPath( getCurrentTemplatePath() );
 	// The web server mapping to this application. Used for remote purposes or static purposes

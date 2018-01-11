@@ -111,14 +111,18 @@ export class WorkBench extends Base{
 
         });
 
-        this.property_modal.on('shown.bs.modal', function(){
+        this.property_modal.on('show.bs.modal', function(){
             
-           /* if (typeof workbench.properties == 'undefined')
+            if (typeof workbench.properties == 'undefined' )
                 workbench.properties = new Properties();
-            */
-            /*$.each(workbench.arrayof_deletebtn_id, function (index,value) {
-                $('#' + value).click({value}, workbench.properties.deleteCustomProperty);
-            })*/
+            else if ( workbench.properties == null )
+                workbench.properties = new Properties();
+            
+        });
+
+        this.property_modal.on('hide.bs.modal', function () {
+
+            workbench.properties = null;
         });
 
         this.delete_btn.on('click', function () {
@@ -301,33 +305,12 @@ export class WorkBench extends Base{
                                 common.errorModalMessage.html(data);
                             } else {
                                 if (data.success || data.SUCCESS) {   
-                                    if (typeof workbench.properties == 'undefined')
+                                    
+                                    /*if (typeof workbench.properties == 'undefined')
                                         workbench.properties = new Properties();
-
+*/
                                     workbench.properties.readCustomProperties();
-                                   /* $('#here_table').html('');
-                                    let table = $('<table></table>').addClass('table');
-                                    let thead = $('<thead></thead>').addClass('mdb-color darken-3');
-                                    let htr = $('<tr></tr>').addClass('text-white');
-                                    let hth = $('<th>##</th><th>Name</th><th>Value</th>');
-                                    htr.append(hth);
-                                    thead.append(htr);
-                                    table.append(thead);
-                                    let tbody = $('<tbody></tbody>');
-
-                                    $.each(data.pdf.Properties, function (key: string, value: string) {
-                                        let btn_id = 'del_cust_' + key;
-                                        workbench.arrayof_deletebtn_id.push( btn_id );
-                                        let row = $('<tr><td>' + key + '</td><td>' + value + '</td><td><button id="' + btn_id + '">Delete</button></td></tr>');
-                                        tbody.append(row);
-                                        let catEl = document.getElementById('"' + btn_id + '"');
-                                        table.append(tbody);
-
-                                    });
-                                    
-                                    
-                                    $('#here_table').append(table);
-                                    */
+                                   
                                 } else {
                                     $('#here_table').html('Unable to load custom properties');
                                     toastr.danger('Unable to load custom properties');
@@ -341,21 +324,7 @@ export class WorkBench extends Base{
                         async: true
                     });
 
-                    
-               /*
-                    for (i = 0; i < 3; i++) {
-                        var row = $('<tr></tr>').addClass('bar').text('result ' + i);
-                        table.append(row);
-                    }*/
-
-                   
-                    
                     workbench.property_modal.modal('show');
-
-                   
-                   
-                   /* if (typeof workbench.properties == 'undefined')
-                        workbench.properties = new Properties();*/
                 },
                 error: function (objRequest, strError) {
                     setTimeout(function () { this.loading_modal.modal('hide'); }, 1500);
@@ -373,7 +342,7 @@ export class WorkBench extends Base{
     public ping( prop:string ): string {
         let workbench = this;
         console.log('ping clicked');
-        workbench.properties.deleteCustomProperty(prop);
+        workbench.properties.deleteCustomProperty(prop,null);
         return "WorkBench class constructed."
     }
 }

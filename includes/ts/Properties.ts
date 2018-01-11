@@ -10,7 +10,7 @@ export class Properties extends Base {
     save_properties_btn : any;
     export_meta_btn     : any;
     import_meta_btn     : any;
-    del_cust_prop_btn   : any;
+    //del_cust_prop_btn   : any;
 
     //divs
     custom_prop_div      : any;
@@ -35,7 +35,7 @@ export class Properties extends Base {
         this.save_properties_btn = $('#save_properties_btn');
         this.export_meta_btn     = $('#export_meta_btn');
         this.import_meta_btn     = $('#import_meta_btn');
-        this.del_cust_prop_btn = $('.btn orange darken-2 del');
+       // this.del_cust_prop_btn = $('.btn orange darken-2 del');
      
         //divs
         this.custom_prop_div      = $('#custom_prop_div');
@@ -76,9 +76,24 @@ export class Properties extends Base {
                     common.action_label.html('Adding');
                     common.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
                 },
-                success: function (html) {
+                success: function (data) {
                     setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
-                    properties.custom_prop_div.html(html);
+                    let tp = $.type(data);
+
+                    if (tp === 'string') {
+                    
+                        common.errorModalDanger.modal('show');
+                        common.errorModalMessage.html(data);
+                    } else {
+                        if (data.success || data.SUCCESS) {
+                            $('#here_table').html('');
+                            properties.renderCustomProperties(data);
+                        } else {
+                            setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
+                           
+                            toastr.danger('Unable to add custom properties');
+                        }
+                    }
                 },
                 error: function (objRequest, strError) {
                     setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);
@@ -164,18 +179,19 @@ export class Properties extends Base {
             });
         });
 
-        properties.del_cust_prop_btn.on('click', function(e:Event){
+       /* properties.del_cust_prop_btn.on('click', function(e:Event){
             let prop = $(this).data('prop');
             console.log(prop);
-        });
+        });*/
 
     }
 
-    public deleteCustomProperty(event:any):void {
+    public deleteCustomProperty(event:any,prp?:Properties):void {
 
         let common:Common = super.getCommon();
         let config:Config = super.getConfig();
-        let properties    = new Properties();
+        
+        let properties    = prp;
         let prop =  $(this).attr("data-prop");
         let view_model = {
             fileName: common.fileName.val(),
@@ -248,7 +264,7 @@ export class Properties extends Base {
         $('#here_table').append(table);
 
         $.each(properties.arrayof_deletebtn_id, function (index, value) {
-            $('#' + value).click({ value }, properties.deleteCustomProperty);
+            $('#' + value).click({ value,properties }, properties.deleteCustomProperty);
         });
 
         setTimeout(function () { common.loading_modal.modal('hide'); }, 1500);

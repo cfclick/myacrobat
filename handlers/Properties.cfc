@@ -159,8 +159,10 @@ component{
 			cfpdf( action="getinfo" ,name="reader", source=source);
 		}
 		
-		rc.pdf = reader;				
-		event.setView("Properties/customPropertyTable").nolayout();
+		rc.pdf = reader;
+		rc.success = true;
+		event.renderData( data=rc, type="json" ).nolayout();				
+		//event.setView("Properties/customPropertyTable").nolayout();
 	}
 	
 	
