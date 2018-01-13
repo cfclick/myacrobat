@@ -120,193 +120,218 @@
 
     </style>
 	
-	
+	<link href="/includes/css/style.css" rel="stylesheet">
 	 <!-- JQuery -->
     <script type="text/javascript" src="/includes/js/jquery-3.2.1.min.js"></script>
 	
 	
 </head>
 
-<body class="fixed-sn">
+<body >
 <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+    <!--Navbar-->
     
- <!--Double navigation-->
-<header>
-    <!-- Sidebar navigation -->
-    <div id="slide-out" class="side-nav sn-bg-4 fixed ">
-        <ul class="custom-scrollbar list-unstyled elegant-color">
-            <!-- Logo -->
-            <li>
-                <div class="logo-wrapper waves-light black">
-                    <a class="navbar-brand" href="<cfoutput>#application.cbcontroller.getconfigSettings().urls.homepage#</cfoutput>"><img src="/includes/images/logo40.png" ></a>    
+  
+   	<!-- Sidebar navigation style="width:250px"-->
+    <ul id="slide-out" class="side-navc fixed custom-scrollbar" >
+        <!-- Logo -->
+        <li>
+            <div class="logo-wrapper waves-light black">
+                <a class="navbar-brand" href="<cfoutput>#application.cbcontroller.getconfigSettings().urls.homepage#</cfoutput>"><img src="/includes/images/logo40.png" ></a>    
+            </div>
+        </li>
+        <!--/. Logo -->
+        <!--Social-->
+       <li>
+            <ul class="social">
+            	<li><a href="https://www.facebook.com/sharer/sharer.php?u=I%20found%20free%20PDF%20app%20online%20https%3A//myacrobat.com%2F&amp;src=sdkpreparse" target="_blank" class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a></li>
+                <li><a href="https://plus.google.com/share?url=I%20found%20free%20PDF%20app%20online%20https%3A//myacrobat.com" target="_blank" class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a></li>
+                <li><a href="https://twitter.com/intent/tweet?text=I%20found%20free%20PDF%20app%20online%20https%3A//myacrobat.com%20powered%20by%20%23ColdFusion" target="_blank" class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
+            </ul>
+        </li>
+        <!--/Social-->
+        <!--Search Form-->
+       <!--- <li>
+            <form class="search-form" role="search">
+                <div class="form-group waves-light">
+                    <input type="text" class="form-control" placeholder="Search">
                 </div>
-            </li>
-            <!--/. Logo -->
-            <!--Social-->
-            <li>
-                <ul class="social">
-                  <li><a href="https://www.facebook.com/sharer/sharer.php?u=I%20found%20free%20PDF%20app%20online%20https%3A//myacrobat.com%2F&amp;src=sdkpreparse" target="_blank" class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a></li>
-                    <li><a href="https://plus.google.com/share?url=I%20found%20free%20PDF%20app%20online%20https%3A//myacrobat.com" target="_blank" class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a></li>
-                    <li><a href="https://twitter.com/intent/tweet?text=I%20found%20free%20PDF%20app%20online%20https%3A//myacrobat.com%20powered%20by%20%23ColdFusion" target="_blank" class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
-                </ul>
-            </li>
-            <!--/Social-->
-            <!--Search Form-->
-            <li>
-                <form class="search-form" role="search">
-                    <div class="form-group waves-light">
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                </form>
-            </li>
-            <!--/.Search Form-->
-            <!-- Side navigation links -->
-            <li>
-                <ul class="collapsible collapsible-accordion">
-                  <li>               	
-                      <a href="#cgi.scRIPT_NAME#" class="collapsible-header waves-effect arrow-r" >Home</a>                 
-                  </li>
-                  <cfoutput>
-                  <cfif comparenocase(event.getcurrentEvent(),'viewer.workbench') eq 0 >
-                      <li>
-                          <a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" 
-                             data-target="##digital_signature_modal">
-                              Signature
-                          </a>
-                          </li>
-                        
-                      <li>
-                            <a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" data-target="##redact_modal">
-                              Redact
-                            </a>
-                      </li>
-                      <li>
-                            <a id="sanitize_btn" http="##" class="collapsible-header waves-effect arrow-r" >
-                              Sanitize
-                            </a>	
-                      </li>
-                      <li>
-                            <a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" data-target="##stamp_modal">
-                              Stamp
-                            </a>
-                      </li>
-                      <li>
-                            <a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" data-target="##barcode_modal">
-                              Barcode
-                            </a>
-                      </li>
-                      <li>
-                            <a id="property_btn" http="##" class="collapsible-header waves-effect arrow-r" >
-                              Properties
-                        </a>
+            </form>
+        </li>--->
+        <!--/.Search Form-->
+        <!-- Side navigation links -->
+        <cfoutput>
+        <li>
+           <ul class="collapsible collapsible-accordion">
+                <li>               	
+                	<a href="#cgi.scRIPT_NAME#" class="collapsible-header waves-effect arrow-r" >
+						Home 
+					</a>                 
+                </li>
+                <cfif comparenocase(event.getcurrentEvent(),'viewer.workbench') eq 0 >
+	                <li>
+	                	<a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" 
+					        data-target="##digital_signature_modal">
+							Signature
+						</a>
 	                </li>
-                 
-	             </cfif>   </cfoutput>
-                   <!--- <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-chevron-right"></i> Submit blog<i class="fa fa-angle-down rotate-icon"></i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="##" class="waves-effect">Submit listing</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Registration form</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-hand-pointer-o"></i> Instruction<i class="fa fa-angle-down rotate-icon"></i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="##" class="waves-effect">For bloggers</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">For authors</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-eye"></i> About<i class="fa fa-angle-down rotate-icon"></i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="##" class="waves-effect">Introduction</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Monthly meetings</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-envelope-o"></i> Contact me<i class="fa fa-angle-down rotate-icon"></i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="##" class="waves-effect">FAQ</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Write a message</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">FAQ</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Write a message</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">FAQ</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Write a message</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">FAQ</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Write a message</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>--->
-                </ul>
-            </li>
-            <!--/. Side navigation links -->
-        </ul>
-        <div class="sidenav-bg mask-strong elegant-color" ></div>
-    </div>
+	               <!--- <li>
+	                	<a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" data-target="##password_modal">
+							Password
+						</a>
+	                </li>--->
+	                <li>
+	                	<a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" data-target="##redact_modal">
+							Redact
+						</a>
+	                </li>
+	                <li>
+	                	<a id="sanitize_btn" http="##" class="collapsible-header waves-effect arrow-r" >
+							Sanitize
+						</a>	
+	                </li>
+	                <li>
+	                	<a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" data-target="##stamp_modal">
+							Stamp
+						</a>
+	                </li>
+	                <li>
+	                	<a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" data-target="##barcode_modal">
+							Barcode
+						</a>
+	                </li>
+	                <li>
+	                	<a id="property_btn" http="##" class="collapsible-header waves-effect arrow-r" >
+							Properties
+						</a>
+	                </li>
+	             </cfif>   
+            </ul>
+       </li>
+        </cfoutput>
+        <!--/. Side navigation links -->
+        <div class="sidenav-bg mask-strong">
+        	
+        	
+        	
+        </div>
+    </ul>
     <!--/. Sidebar navigation -->
+   
+   
+
+   		<!--Main Layout-->
+		
+		        	<cfoutput><div class="conatiner-fluid" style="padding-left:230px" >#renderView()#</div></cfoutput>           
+		       
+<!--Main Layout-->
+
+  
+        <!--- <nav class="navbar navbar-expand-lg fixed-top bg-faded">
+            <div class="container">
+                <a class="navbar-brand" href="<cfoutput>#application.cbcontroller.getconfigSettings().urls.homepage#</cfoutput>"><img src="/includes/images/logo.png" ></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto text-white">
+                    	
+                       
+                    </ul>
+                </div>
+            </div>
+        </nav>--->
+
+    <!--/.Navbar-->
+    <!--Mask-->
+    
+   <!--- <div class="view hm-black-light">
+        <div class="full-bg-img flex-center">   
+        	<a class="navbar-brand" href="<cfoutput>#application.cbcontroller.getconfigSettings().urls.homepage#</cfoutput>"><img src="/includes/images/logo.png" ></a>    
+        	<cfoutput><div class="container-fluid" >#renderView()#</div></cfoutput>           
+        </div>
+    </div>
+    <!--/.Mask-->
+
+    <!--Footer-->
+    <footer class="page-footer center-on-small-only">
+       <!--Footer links-->  
+        <hr class="orange darken-2">
+        <!--Copyright-->
+        <div class="footer-copyright">
+            <div class="container-fluid">
+                © 2017 Copyright: <a href="https://www.myacrobat.com"> myacrobat.com </a>
+
+            </div>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>--->
+    <!--/.Footer-->
+    
+    <!--Double navigation-->
+
+    
     <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav elegant-color">
+    <!---<nav class="navbar navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav">
         <!-- SideNav slide-out button -->
         <div class="float-left">
-            <a href="##" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="fa fa-bars"></i></a>
         </div>
         <!-- Breadcrumb-->
         <div class="breadcrumb-dn mr-auto">
-           <p> </p>
+            
         </div>
         <ul class="nav navbar-nav nav-flex-icons ml-auto">
+        	<cfif comparenocase(event.getcurrentEvent(),'viewer.workbench') eq 0 >
             <li class="nav-item">
-                <a class="nav-link"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Contact</span></a>
-            </li>
-            <!---<li class="nav-item">
-                <a class="nav-link"><i class="fa fa-comments-o"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>
+            	<a id="restore_btn" href="##" class="btn-floating btn-sm bg-primary"><i class="fa fa-undo fa-lg" aria-hidden="true"></i></a>
+                <!---<a class="nav-link"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Contact</span></a>--->
             </li>
             <li class="nav-item">
-                <a class="nav-link"><i class="fa fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Account</span></a>
+            	<a id="delete_btn" href="##" class="btn-floating btn-sm orange"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a>
+               <!--- <a class="nav-link"><i class="fa fa-comments-o"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>--->
+            </li>
+            <li class="nav-item">
+            	<a id="email_btn" href="##" class="btn-floating btn-sm orange" data-toggle="modal" data-target="##myemail_modal"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a>
+                <!---<a class="nav-link"><i class="fa fa-user"></i> <span class="clearfix d-none d-sm-inline-block">Account</span></a>--->
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="##" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <!---<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Dropdown
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="##">Action</a>
-                    <a class="dropdown-item" href="##">Another action</a>
-                    <a class="dropdown-item" href="##">Something else here</a>
-                </div>
-            </li>--->
+                <div class="dropdown-menu dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>--->
+            </li>
+            </cfif>
         </ul>
-    </nav>
+    </nav>--->
+   
     <!-- /.Navbar -->
-</header>
+
 <!--/.Double navigation-->
 
-<!--Main Layout-->
-<main>
-    <div class="container-fluid mt-5">
-      <cfoutput>#renderView()#</cfoutput>
-        
-    </div>
-</main>
-<!--Main Layout-->   
 
-    <!-- SCRIPTS -->  
+<!---<footer class="page-footer center-on-small-only">
+       <!--Footer links-->  
+     <!---  <hr class="orange darken-2">--->
+        <!--Copyright-->
+        <div class="footer-copyright">
+            <div class="container-fluid">
+                © 2017 Copyright: <a href="https://www.myacrobat.com"> myacrobat.com </a>
+
+            </div>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>--->
+
+    <!-- SCRIPTS -->
+
+   
     <!-- Bootstrap dropdown -->
     <script type="text/javascript" src="/includes/MDB/js/popper.min.js"></script>
 
@@ -321,7 +346,8 @@
 	<!---<script src="includes/js/main/sessionManager.js"></script>--->
 	
 	<script>
-   
+    CONTACT_DATA =[];
+    GLOBALSCOPE = null;
 	$(function() {
 		// activate all drop downs
 		$('.dropdown-toggle').dropdown();
@@ -331,9 +357,9 @@
 	
 
 		$(document).ready( function() {
-			// SideNav Initialization
-      $(".button-collapse").sideNav();
-					
+			
+			$(".button-collapse").sideNav();
+			
 			$('.popover-dismiss').popover({
 				  trigger: 'focus'
 				})

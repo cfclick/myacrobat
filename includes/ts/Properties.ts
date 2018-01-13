@@ -190,7 +190,9 @@ export class Properties extends Base {
 
         let common:Common = super.getCommon();
         let config:Config = super.getConfig();
-        
+        if( typeof prp == 'undefined' )
+            prp = new Properties();
+
         let properties    = prp;
         let prop =  $(this).attr("data-prop");
         let view_model = {
