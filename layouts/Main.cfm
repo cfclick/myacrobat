@@ -152,21 +152,22 @@
             </li>
             <!--/Social-->
             <!--Search Form-->
-            <li>
+            <!--<li>
                 <form class="search-form" role="search">
                     <div class="form-group waves-light">
                         <input type="text" class="form-control" placeholder="Search">
                     </div>
                 </form>
-            </li>
+            </li>-->
             <!--/.Search Form-->
             <!-- Side navigation links -->
             <li>
                 <ul class="collapsible collapsible-accordion">
-                  <li>               	
+                   <cfoutput>
+                   <li>               	
                       <a href="#cgi.scRIPT_NAME#" class="collapsible-header waves-effect arrow-r" >Home</a>                 
                   </li>
-                  <cfoutput>
+                 
                   <cfif comparenocase(event.getcurrentEvent(),'viewer.workbench') eq 0 >
                       <li>
                           <a http="##" class="collapsible-header waves-effect arrow-r" data-toggle="modal" 
@@ -202,58 +203,7 @@
 	                </li>
                  
 	             </cfif>   </cfoutput>
-                   <!--- <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-chevron-right"></i> Submit blog<i class="fa fa-angle-down rotate-icon"></i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="##" class="waves-effect">Submit listing</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Registration form</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-hand-pointer-o"></i> Instruction<i class="fa fa-angle-down rotate-icon"></i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="##" class="waves-effect">For bloggers</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">For authors</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-eye"></i> About<i class="fa fa-angle-down rotate-icon"></i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="##" class="waves-effect">Introduction</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Monthly meetings</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-envelope-o"></i> Contact me<i class="fa fa-angle-down rotate-icon"></i></a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="##" class="waves-effect">FAQ</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Write a message</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">FAQ</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Write a message</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">FAQ</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Write a message</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">FAQ</a>
-                                </li>
-                                <li><a href="##" class="waves-effect">Write a message</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>--->
+                   
                 </ul>
             </li>
             <!--/. Side navigation links -->
@@ -272,10 +222,10 @@
            <p> </p>
         </div>
         <ul class="nav navbar-nav nav-flex-icons ml-auto">
-            <li class="nav-item">
+           <!--- <li class="nav-item">
                 <a class="nav-link"><i class="fa fa-envelope"></i> <span class="clearfix d-none d-sm-inline-block">Contact</span></a>
             </li>
-            <!---<li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link"><i class="fa fa-comments-o"></i> <span class="clearfix d-none d-sm-inline-block">Support</span></a>
             </li>
             <li class="nav-item">
@@ -299,7 +249,7 @@
 
 <!--Main Layout-->
 <main>
-    <div class="container-fluid mt-5">
+    <div class="container-fluid">
       <cfoutput>#renderView()#</cfoutput>
         
     </div>
@@ -316,9 +266,6 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="/includes/MDB/js/mdb.min.js"></script>
 
-	<!---<script src="/includes/js/config.js"></script>
-	<script src="/includes/js/main/main.js"></script>--->
-	<!---<script src="includes/js/main/sessionManager.js"></script>--->
 	
 	<script>
    
@@ -339,7 +286,8 @@
 				})
 		});
 	</script>
-<script src="../dist/bundle.js"  ></script>
+    <script src="../includes/js/bundle.js"  ></script>
+
 <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE 8 and IE 9 -->
 <!--[if (gte IE 8)&(lt IE 10)]>
 <script src="js/cors/jquery.xdr-transport.js"></script>

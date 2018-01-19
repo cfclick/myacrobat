@@ -4,6 +4,7 @@
 	padding-bottom: 56.25%; /* proportion value to aspect ratio 16:9 (9 / 16 = 0.5625 or 56.25%) */
 	padding-top: 0px;
 	height: 0;
+	max-height: calc(100vh - 210px);
 	overflow: auto;
 	}
 	.fluidMedia iframe {
@@ -51,18 +52,18 @@
 	<input type="hidden" name="fileName" id="fileName" value="#rc.fileName#" />
 	<input type="hidden" name="passPdf" id="passPdf"  value="#rc.password#" />
 										
-	<div class="container-fluid" >
+	<!--<div class="container-fluid" >-->
 		<div class="row wow fadeIn" data-wow-delay="0.4s" >
 			<div class="col-sm-12 col-md-12 col-lg-12">					
 				<div class="fluidMedia">
-					<iframe id="pdf_iframe" src="#rc.homepage#?event=viewer.preview&fileName=#rc.fileName###zoom=75" frameborder="0" >
+					<iframe id="pdf_iframe" src="#rc.homepage#?event=viewer.preview&fileName=#rc.fileName###zoom=75" frameborder="0" style="width:100%" >
 					</iframe>
 				</div>
 			</div>
 		</div>
 		
 		<br>
-	</div>
+	<!--</div>-->
 	
 	<!-- ============================================ SIGNATURE MODAL 
 	=============================================== -->
@@ -648,14 +649,6 @@
 	</div><!--/ Modal -->
 	<!-- ==============================================END EMAIL MODAL================================================ -->
 </cfoutput>
-
-<!---<script src="/includes/js/viewer/workbench.js" 			type="application/javascript" ></script>--->
-<!---<script src="/includes/js/viewer/digitalsignature.js" 	type="application/javascript" ></script>
-<script src="/includes/js/viewer/redact.js" 			type="application/javascript" ></script>
-<script src="/includes/js/viewer/properties.js" 		type="application/javascript" ></script>
-<script src="/includes/js/viewer/stamp.js" 				type="application/javascript" ></script>
-<script src="/includes/js/viewer/barcode.js" 			type="application/javascript" ></script>
-<script src="/includes/js/viewer/protect.js" 			type="application/javascript" ></script>--->
 
 <script >
 

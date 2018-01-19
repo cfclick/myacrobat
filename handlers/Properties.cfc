@@ -61,8 +61,8 @@ component{
 	   		else
 	   			cfpdf( action="getinfo" ,name="reader", source=source);
    						
-			reader.Created = formatPDFdate( reader.Created );
-			reader.Modified = formatPDFdate( reader.Modified );
+			reader.Created = formatPDFdate( reader.Created ) ?: 'undefined';
+			reader.Modified = formatPDFdate( reader.Modified ) ?: 'undefined';
 			rc.pdf = reader;
 			
 			rc.Created = "D:" & DateFormat(now(), "YYYYMMDD") & TimeFormat(now(), "HHmmss") & "-00'00'";			
@@ -264,14 +264,26 @@ component{
 		event.renderData( data=rc, type="json" ).nolayout();
 	}
 	
-	private string function formatPDFdate( required string psdDateString ){
-		
-		var temp = replace( psdDateString,'D:','');	
-		
-		if( len( trim( temp ) ) )
-			return dateFormat(createDateTime( left( temp,4), mid( temp,5,2), mid( temp,7,2), mid( temp,9,2), mid( temp,11,2),mid( temp,13,2) ), 'mm/dd/yyyy hh:mm:ss');
-		else
+	private string function formatPDFdate( string psdDateString ){
+
+		if( isdefined('arguments.psdDateString')){
+			var temp = replace( psdDateString,'D:','');	
+			temp = replace( temp,'Z','');
+			
+			if( len( trim( temp )) >= 12 ){
+				try{
+					var datevalue = createDateTime( left( temp,4), mid( temp,5,2), mid( temp,7,2), mid( temp,9,2), mid( temp,11,2),mid( temp,13,2));
+					return dateFormat(datevalue, 'mm/dd/yyyy hh:mm:ss');
+				}catch(any e){
+					return 'Invalid Date';
+				}
+				
+			}else
+				return "";
+		}else{
 			return "";
+		}
+		
 	}
 	
 	

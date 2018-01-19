@@ -48,6 +48,11 @@ export class Main extends Base {
         let common = super.getCommon();
         let main = this;
 
+        this.upload_pdf_btn.on('click', function(){
+            common.action_label.html('Uploading file...');
+            common.loading_modal.modal({ show: true, backdrop: 'static', keyboard: false });
+        });
+
         common.loading_modal.on('hidden.bs.modal', function () {
             $(this).data('bs.modal', null);
         });

@@ -71,7 +71,7 @@ If you are interested in batch (production) services, please contact us at info@
 								<cfoutput>#rc.showerror#</cfoutput>
 							</div>
 						</cfif>
-						<form id="fileupload" action="?event=Main.uploadFiles" method="POST" enctype="multipart/form-data" onsubmit="return beforeUpload();">
+						<form id="fileupload" action="?event=Main.uploadFiles" method="POST" enctype="multipart/form-data">
 							<div class="file-field">
 								<div class="btn orange darken-2 btn-sm">
 									<span>Choose file</span>
